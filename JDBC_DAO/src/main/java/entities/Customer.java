@@ -15,11 +15,12 @@ public class Customer implements Entity {
     private static final int PHONE = 4;
     private static final int LOGIN = 5;
     private static final int PASS = 6;
-    public static final int COLUMNS_COUNT = 7;
+    private static final int STATUS_ID = 7;
+    public static final int COLUMNS_COUNT = 8;
 
-    private static final String[] COLUMNS = {"id_customer", "first_name", "last_name", "email", "phone", "login", "pass"};
-    private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR,};
-    private static Object[] values = new Object[COLUMNS_COUNT];
+    private static final String[] COLUMNS = {"id_customer", "first_name", "last_name", "email", "phone", "login", "pass", "id_status"};
+    private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.INTEGER};
+    private Object[] values = new Object[COLUMNS_COUNT];
 
     public Integer getId() {
         return (Integer) values[ID];
@@ -77,10 +78,22 @@ public class Customer implements Entity {
         values[PASS] = pass;
     }
 
+    public Integer getStatusId() {
+        return (Integer) values[STATUS_ID];
+    }
+
+    public void setStatusId(Integer id) {
+        values[STATUS_ID] = id;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getFirstName() + " " + getLastName() + " " + getEmail() + " " + getPhone() + " " + getLogin() + " " + getPass());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 

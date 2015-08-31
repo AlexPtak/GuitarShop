@@ -1,8 +1,10 @@
 package mysql;
 
 import dao.Entity;
+import entities.Customer;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,25 +36,66 @@ public class TransactionManager {
     public Entity singleSelect(Entity entity, String addToWhere) throws SQLException {
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT ");
-        for (int i = 0; i < entity.getCulums().length; i++) {
-            builder.append(entity.getCulums()[i]);
-            if (i != entity.getCulums().length - 1) builder.append(", ");
-        }
+        for (int i = 0; i < entity.getCulums().length; i++) builder.append(entity.getCulums()[i] + ", ");
+        builder.delete(builder.length() - 2, builder.length());
         builder.append(" FROM " + entity.getTable());
         builder.append(" WHERE ");
         for (int i = 0; i < entity.getValues().length; i++) {
             Object value = entity.getValues()[i];
             if (value == null) continue;
             builder.append(entity.getCulums()[i] + " = " + prepareValue(value, entity.getTypes()[i]) + ";");
+            break;
         }
         String sql = builder.toString();
-        System.out.println(sql);
-        ResultSet resultSet;
-        return entity.getEmptyEntity();
+        Statement statement = null;
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            fillEntity(entity, resultSet);
+        } finally {
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+        return entity;
     }
 
     public List<Entity> select(Entity entity, String addToWhere) throws SQLException {
-        return Collections.EMPTY_LIST;
+        StringBuilder builder = new StringBuilder();
+        ArrayList<Entity> entities = new ArrayList<Entity>();
+        builder.append("SELECT ");
+        for (int i = 0; i < entity.getCulums().length; i++) builder.append(entity.getCulums()[i] + ", ");
+        builder.delete(builder.length() - 2, builder.length());
+        builder.append(" FROM " + entity.getTable());
+        builder.append(" WHERE ");
+        System.out.println(entity.toString());
+        for (int i = 0; i < entity.getValues().length; i++) {
+            Object value = entity.getValues()[i];
+            if (value == null) continue;
+            builder.append(entity.getCulums()[i] + " = " + prepareValue(value, entity.getTypes()[i]) + " AND ");
+        }
+        builder.delete(builder.length() - 5, builder.length());
+        builder.append(";");
+        System.out.println(builder.toString());
+        Statement statement = null;
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            String sql = builder.toString();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Entity emptyEntity = entity.getEmptyEntity();
+                fillEntity(emptyEntity, resultSet);
+                entities.add(emptyEntity);
+            }
+        } finally {
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+        return entities;
     }
 
     public void insert(Entity entity) {
@@ -63,7 +106,7 @@ public class TransactionManager {
             if (i != entity.getCulums().length - 1) builder.append(", ");
         }
         builder.append(") VALUES(");
-        for (int i = 0; i < entity.getValues().length; i++) {
+        for (int i = 0; i < entity.getCulums().length; i++) {
             Object value = entity.getValues()[i];
             if (value == null) continue;
             builder.append(prepareValue(value, entity.getTypes()[i]));
@@ -100,15 +143,20 @@ public class TransactionManager {
     }
 
     private void fillEntity(Entity entity, ResultSet resultSet) throws SQLException {
-        for (int i = 0; i < entity.getCulums().length - 1; i++) {
+        for (int i = 0; i < entity.getCulums().length; i++) {
             switch (entity.getTypes()[i]) {
                 case INTEGER:
                 case SMALLINT:
-                case DOUBLE:
                     entity.getValues()[i] = resultSet.getInt(i + 1);
+                    break;
+                case DOUBLE:
+                    entity.getValues()[i] = resultSet.getDouble(i + 1);
+                    break;
                 case VARCHAR:
                 case CHAR:
+                case NVARCHAR:
                     entity.getValues()[i] = resultSet.getString(i + 1);
+                    break;
             }
         }
     }

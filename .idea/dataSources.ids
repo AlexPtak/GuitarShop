@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - guitar_shop@localhost" uuid="1e5c7234-a814-422c-8e4f-ff674e6db941">
+  <data-source name="MySQL - guitar_shop@localhost" uuid="ed66190d-f302-4a95-8205-3376c63c85d4">
     <database-info product="MySQL" version="5.6.25-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
@@ -15,10 +15,12 @@
       <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="pass" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="id_status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_customer"/>
-      <foreign-key name="id_status_fk" columns="id_customer" ref-table="status" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_status" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_customer_status1" columns="id_status" ref-table="status" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_status" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="id_customer_fk" table="purchase" schema="" catalog="guitar_shop" columns="id_customer"/>
       <index name="login_UNIQUE" unique="true" columns="login"/>
+      <index name="fk_customer_status1_idx" unique="false" columns="id_status"/>
     </table>
     <table name="guitar" schema="" catalog="guitar_shop" type="TABLE">
       <column name="id_guitar" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -92,7 +94,7 @@
       <column name="status" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
       <column name="desc" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_status"/>
-      <exported-key name="id_status_fk" table="customer" schema="" catalog="guitar_shop" columns="id_customer"/>
+      <exported-key name="fk_customer_status1" table="customer" schema="" catalog="guitar_shop" columns="id_status"/>
       <exported-key name="fk_id_status" table="guitar" schema="" catalog="guitar_shop" columns="id_guitar"/>
     </table>
   </data-source>

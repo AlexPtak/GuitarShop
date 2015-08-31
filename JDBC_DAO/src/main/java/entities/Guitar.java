@@ -18,7 +18,8 @@ public class Guitar implements Entity {
     public static final int STATUS_ID = 7;
     public static final int COLUMNS_COUNT = 8;
 
-    private static final String[] COLUMNS = {"id_guitar", "model", "price", "country", "color", "number_of_strings", "number_of_frets", "id_status"};
+    // MUMBER OF FRETS, KARL!!!!!!!!!!!!!!!!!!!!!!
+    private static final String[] COLUMNS = {"id_guitar", "model", "price", "country", "color", "number_of_strings", "mumber_of_frets", "id_status"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.DOUBLE, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.SMALLINT, JDBCType.SMALLINT, JDBCType.INTEGER};
     private Object[] values = new Object[COLUMNS_COUNT];
 
@@ -89,7 +90,11 @@ public class Guitar implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getMedel() + " " + getMedel() + " " + getPrice() + " " + getCountry() + " " + getColor() + " " + getNumberOfFrets() + " " + getNumberOfStrings() + " " + getStatusId());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 
