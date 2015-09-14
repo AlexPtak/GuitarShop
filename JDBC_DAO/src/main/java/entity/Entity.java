@@ -1,7 +1,6 @@
-package dao;
+package entity;
 
 import java.sql.JDBCType;
-import java.util.List;
 
 public interface Entity {
     public String getTable();

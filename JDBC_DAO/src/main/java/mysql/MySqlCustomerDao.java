@@ -1,28 +1,25 @@
 package mysql;
 
 import dao.CustomerDao;
-import dao.Entity;
-import entities.Customer;
-import entities.Guitar;
+import entity.Entity;
+import entity.Customer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlCustomerDao implements CustomerDao {
 
-    public Entity searchById(int id) throws SQLException {
-        TransactionManager transactionManager = new TransactionManager();
+    public Entity searchById(int id) throws SQLException, IOException, PropertyVetoException {
+        GuitarShopManager transactionManager = new GuitarShopManager();
         Customer customer = new Customer();
         customer.setId(id);
         return transactionManager.singleSelect(customer, null);
     }
 
-    public List<Entity> searchByBrandAnType(String lastName, String mail) throws SQLException {
-        TransactionManager transactionManager = new TransactionManager();
+    public List<Entity> searchByBrandAnType(String lastName, String mail) throws SQLException, IOException, PropertyVetoException {
+        GuitarShopManager transactionManager = new GuitarShopManager();
         Customer customer = new Customer();
         customer.setLastName(lastName);
         customer.setEmail(mail);

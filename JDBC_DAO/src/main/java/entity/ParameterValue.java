@@ -1,20 +1,18 @@
-package entities;
-
-import dao.Entity;
+package entity;
 
 import java.sql.JDBCType;
 
-public class Parameter implements Entity {
+public class ParameterValue implements Entity {
 
-    private static final String TABLE = "guitar_shop.parameter";
+    private static final String TABLE = "guitar_shop.parameter_value";
 
     private static final int ID = 0;
-    private static final int PARAMETER_TYPE_ID = 1;
     private static final int VALUE = 2;
+    private static final int PARAMETER_TYPE_ID = 2;
     public static final int COLUMNS_COUNT = 3;
 
-    private static final String[] COLUMNS = {"id_parameter", "id_parameter_type", "value"};
-    private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.INTEGER, JDBCType.VARCHAR};
+    private static final String[] COLUMNS = {"id_parameter_value", "value", "parameter_type_id"};
+    private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.INTEGER};
     private Object[] values = new Object[COLUMNS_COUNT];
 
     public Integer getId() {
@@ -25,14 +23,6 @@ public class Parameter implements Entity {
         values[ID] = id;
     }
 
-    public Integer getParameterTypeId() {
-        return (Integer) values[PARAMETER_TYPE_ID];
-    }
-
-    public void setParameterTypeId(Integer parameterTypeId) {
-        values[PARAMETER_TYPE_ID] = parameterTypeId;
-    }
-
     public String getValue() {
         return (String) values[VALUE];
     }
@@ -41,12 +31,18 @@ public class Parameter implements Entity {
         values[VALUE] = value;
     }
 
+    public Integer getParameterTypeId() {
+        return (Integer) values[PARAMETER_TYPE_ID];
+    }
+
+    public void setParameterTypeId(Integer parameterTypeId) {
+        values[PARAMETER_TYPE_ID] = parameterTypeId;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " ");
-        }
+        builder.append(getId() + " " + getValue() + " " + getParameterTypeId());
         return builder.toString();
     }
 
@@ -72,6 +68,6 @@ public class Parameter implements Entity {
 
     @Override
     public Entity getEmptyEntity() {
-        return new Parameter();
+        return new ParameterValue();
     }
 }

@@ -1,18 +1,16 @@
-package entities;
-
-import dao.Entity;
+package entity;
 
 import java.sql.JDBCType;
 
-public class GuitarBrand implements Entity {
+public class GuitarType implements Entity {
 
-    private static final String TABLE = "guitar_shop.guitar_brand";
+    private static final String TABLE = "guitar_shop.guitar_type";
 
     private static final int ID = 0;
-    private static final int BRAND = 1;
+    private static final int TYPE = 1;
     public static final int COLUMNS_COUNT = 2;
 
-    private static final String[] COLUMNS = {"id_guitar_brand", "brand"};
+    private static final String[] COLUMNS = {"id_guitar_type", "type"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR};
     private Object[] values = new Object[COLUMNS_COUNT];
 
@@ -24,18 +22,18 @@ public class GuitarBrand implements Entity {
         values[ID] = id;
     }
 
-    public String getBrand() {
-        return (String) values[BRAND];
+    public String getType() {
+        return (String) values[TYPE];
     }
 
-    public void setBrand(String brand) {
-        values[BRAND] = brand;
+    public void setType(String type) {
+        values[TYPE] = type;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getBrand());
+        builder.append(getId() + " " + getType());
         return builder.toString();
     }
 
@@ -61,6 +59,6 @@ public class GuitarBrand implements Entity {
 
     @Override
     public Entity getEmptyEntity() {
-        return new GuitarBrand();
+        return new GuitarType();
     }
 }

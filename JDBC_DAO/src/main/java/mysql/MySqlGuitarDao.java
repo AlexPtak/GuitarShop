@@ -1,6 +1,5 @@
 package mysql;
 
-import dao.Entity;
 import dao.GuitarDao;
 
 public class MySqlGuitarDao implements GuitarDao {

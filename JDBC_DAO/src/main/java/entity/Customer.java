@@ -1,6 +1,4 @@
-package entities;
-
-import dao.Entity;
+package entity;
 
 import java.sql.JDBCType;
 
