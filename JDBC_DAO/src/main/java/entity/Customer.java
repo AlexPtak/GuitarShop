@@ -14,7 +14,7 @@ public class Customer implements Entity {
     private static final int LOGIN = 5;
     private static final int PASS = 6;
     private static final int STATUS_ID = 7;
-    public static final int COLUMNS_COUNT = 8;
+    private static final int COLUMNS_COUNT = 8;
 
     private static final String[] COLUMNS = {"id_customer", "first_name", "last_name", "email", "phone", "login", "pass", "id_status"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.INTEGER};

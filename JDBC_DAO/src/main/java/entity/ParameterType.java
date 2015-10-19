@@ -1,7 +1,11 @@
 package entity;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.JDBCType;
 
+@XmlRootElement
 public class ParameterType implements Entity {
 
     private static final String TABLE = "guitar_shop.parameter_type";
@@ -14,6 +18,7 @@ public class ParameterType implements Entity {
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR};
     private Object[] values = new Object[COLUMNS_COUNT];
 
+    @XmlAttribute
     public Integer getId() {
         return (Integer) values[ID];
     }
@@ -22,6 +27,7 @@ public class ParameterType implements Entity {
         values[ID] = id;
     }
 
+    @XmlElement
     public String getType() {
         return (String) values[TYPE];
     }
@@ -33,7 +39,11 @@ public class ParameterType implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getType());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 

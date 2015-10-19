@@ -1,7 +1,8 @@
 package mysql;
 
-import entity.Entity;
 import entity.Customer;
+import entity.Entity;
+import entity.ParameterType;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,16 +21,15 @@ public class GuitarShopManagerTest {
     }
 
     @Test
-    @Ignore
-    public void testSingleSelect() throws Exception {
+    public void testSingleSelect() throws PropertyVetoException, SQLException, IOException {
         MySqlCustomerDao mySqlCustomerDao = new MySqlCustomerDao();
-        Entity entity = mySqlCustomerDao.searchById(3);
+        Entity entity = mySqlCustomerDao.searchById(6);
         System.out.println(entity.toString());
     }
 
     @Test
     @Ignore
-    public void testSelect() throws Exception {
+    public void testSelect() throws PropertyVetoException, SQLException, IOException {
         Customer customer = new Customer();
         customer.setFirstName("George");
         customer.setPass("12546");
@@ -38,7 +38,14 @@ public class GuitarShopManagerTest {
 
     @Test
     @Ignore
-    public void testInsert() throws Exception {
+    public void testSelectAll() throws PropertyVetoException, SQLException, IOException {
+        ParameterType parameterType = new ParameterType();
+        for (Entity elem : GuitarShopManager.getInstance().selectAll(parameterType)) System.out.println(elem.toString());
+    }
+
+    @Test
+    @Ignore
+    public void testInsert() throws SQLException {
         Customer customer = new Customer();
         customer.setEmail("georgeKollias@gmail.com");
         customer.setLastName("Kollias");
@@ -52,7 +59,7 @@ public class GuitarShopManagerTest {
 
     @Test
     @Ignore
-    public void testUpdate() throws Exception {
+    public void testUpdate() throws PropertyVetoException, SQLException, IOException {
         int primeryKey = 6;
         Entity oldEntity = new MySqlCustomerDao().searchById(primeryKey);
         Customer editedEntity = new Customer();

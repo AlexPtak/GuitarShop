@@ -16,8 +16,7 @@ public class Guitar implements Entity {
     public static final int STATUS_ID = 7;
     public static final int COLUMNS_COUNT = 8;
 
-    // MUMBER OF FRETS, KARL!!!!!!!!!!!!!!!!!!!!!!
-    private static final String[] COLUMNS = {"id_guitar", "model", "price", "country", "color", "number_of_strings", "mumber_of_frets", "id_status"};
+    private static final String[] COLUMNS = {"id_guitar", "model", "price", "country", "color", "number_of_strings", "number_of_frets", "id_guitar_status"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.DOUBLE, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.SMALLINT, JDBCType.SMALLINT, JDBCType.INTEGER};
     private Object[] values = new Object[COLUMNS_COUNT];
 

@@ -15,12 +15,12 @@
       <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="pass" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="id_status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_customer"/>
-      <foreign-key name="fk_customer_status" columns="id_status" ref-table="status" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_status" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_customer_customer_status1" columns="id_status" ref-table="customer_status" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_status" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="fk_purchase_customer" table="purchase" schema="" catalog="guitar_shop" columns="id_customer"/>
       <index name="login_UNIQUE" unique="true" columns="login"/>
-      <index name="fk_customer_status_idx" unique="false" columns="id_status"/>
+      <index name="fk_customer_customer_status1_idx" unique="false" columns="id_status"/>
     </table>
     <table name="guitar" schema="" catalog="guitar_shop" type="TABLE">
       <column name="id_guitar" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -29,31 +29,31 @@
       <column name="country" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="color" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="number_of_strings" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5"/>
-      <column name="mumber_of_frets" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5"/>
-      <column name="id_status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="guitar_brand_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="guitar_type_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="number_of_frets" sqlType="SMALLINT" precision="5" scale="0" nullable="true" jdbcType="5"/>
+      <column name="id_guitar_status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_guitar_brand" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_guitar_type" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_guitar"/>
-      <foreign-key name="fk_guitar_guitar_brand" columns="guitar_brand_id" ref-table="guitar_brand" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_guitar_brand" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_guitar_guitar_type" columns="guitar_type_id" ref-table="guitar_type" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_guitar_type" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_id_status" columns="id_status" ref-table="status" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_status" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_guitar_guitar_brand" columns="id_guitar_brand" ref-table="guitar_brand" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_guitar_brand" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_guitar_guitar_status1" columns="id_guitar_status" ref-table="guitar_status" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_status" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_guitar_guitar_type" columns="id_guitar_type" ref-table="guitar_type" ref-schema="" ref-catalog="guitar_shop" ref-columns="id_guitar_type" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="fk_id_guitar" table="parameter" schema="" catalog="guitar_shop" columns="id_parameter"/>
       <exported-key name="fk_purchase_guitar" table="purchase" schema="" catalog="guitar_shop" columns="id_guitar"/>
-      <index name="fk_guitar_brand_idx" unique="false" columns="guitar_brand_id"/>
-      <index name="fk_guitar_type_idx" unique="false" columns="guitar_type_id"/>
-      <index name="fk_id_status_idx" unique="false" columns="id_status"/>
+      <index name="fk_guitar_brand_idx" unique="false" columns="id_guitar_brand"/>
+      <index name="fk_guitar_guitar_status1_idx" unique="false" columns="id_guitar_status"/>
+      <index name="fk_guitar_type_idx" unique="false" columns="id_guitar_type"/>
     </table>
     <table name="guitar_brand" schema="" catalog="guitar_shop" type="TABLE">
       <column name="id_guitar_brand" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="brand" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_guitar_brand"/>
-      <exported-key name="fk_guitar_guitar_brand" table="guitar" schema="" catalog="guitar_shop" columns="guitar_brand_id"/>
+      <exported-key name="fk_guitar_guitar_brand" table="guitar" schema="" catalog="guitar_shop" columns="id_guitar_brand"/>
     </table>
     <table name="guitar_type" schema="" catalog="guitar_shop" type="TABLE">
       <column name="id_guitar_type" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_guitar_type"/>
-      <exported-key name="fk_guitar_guitar_type" table="guitar" schema="" catalog="guitar_shop" columns="guitar_type_id"/>
+      <exported-key name="fk_guitar_guitar_type" table="guitar" schema="" catalog="guitar_shop" columns="id_guitar_type"/>
     </table>
     <table name="parameter" schema="" catalog="guitar_shop" type="TABLE">
       <column name="id_parameter" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -95,8 +95,6 @@
       <column name="status" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
       <column name="desc" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_status"/>
-      <exported-key name="fk_customer_status" table="customer" schema="" catalog="guitar_shop" columns="id_status"/>
-      <exported-key name="fk_id_status" table="guitar" schema="" catalog="guitar_shop" columns="id_status"/>
     </table>
   </data-source>
 </component>

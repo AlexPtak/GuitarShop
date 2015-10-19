@@ -2,8 +2,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ParserTest {
 
     Parser parser;
@@ -14,11 +12,13 @@ public class ParserTest {
     }
 
     @Test
+    @Ignore
     public void testCreatePidisko() throws Exception {
         parser.createPidisko();
     }
 
     @Test
+    @Ignore
     public void testDomParser() throws Exception {
         parser.DomParser();
     }

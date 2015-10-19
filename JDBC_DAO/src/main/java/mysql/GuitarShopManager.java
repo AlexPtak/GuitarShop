@@ -19,7 +19,7 @@ public class GuitarShopManager {
     private String url = "jdbc:mysql://localhost:3306/";
     private String driver = "com.mysql.jdbc.Driver";
 
-    public GuitarShopManager() throws IOException, SQLException, PropertyVetoException {
+    private GuitarShopManager() throws IOException, SQLException, PropertyVetoException {
         comboPooledDataSource = new ComboPooledDataSource();
         comboPooledDataSource.setDriverClass(driver);
         comboPooledDataSource.setJdbcUrl(url);
@@ -66,13 +66,15 @@ public class GuitarShopManager {
             String sql = builder.toString();
             System.out.println(sql);
             ResultSet resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            fillEntity(entity, resultSet);
+            if (resultSet.next()) {
+                //resultSet.next();
+                fillEntity(entity, resultSet);
+                return entity;
+            } else return null;
         } finally {
             if (statement != null) statement.close();
             if (connection != null) connection.close();
         }
-        return entity;
     }
 
 
@@ -94,23 +96,20 @@ public class GuitarShopManager {
         String sql = builder.toString();
         System.out.println(sql);
         databaseExecution(entity, sql, entities);
-        /*Statement statement = null;
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            statement = connection.createStatement();
-            String sql = builder.toString();
-            System.out.println(sql);
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                Entity emptyEntity = entity.getEmptyEntity();
-                fillEntity(emptyEntity, resultSet);
-                entity.add(emptyEntity);
-            }
-        } finally {
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
-        }*/
+        return entities;
+    }
+
+    public List<Entity> selectAll(Entity entity) throws SQLException {
+        StringBuilder builder = new StringBuilder();
+        ArrayList<Entity> entities = new ArrayList<Entity>();
+        builder.append("SELECT ");
+        for (int i = 0; i < entity.getCulums().length; i++) builder.append(entity.getCulums()[i] + ", ");
+        builder.delete(builder.length() - 2, builder.length());
+        builder.append(" FROM " + entity.getTable());
+        builder.append(";");
+        String sql = builder.toString();
+        System.out.println(sql);
+        databaseExecution(entity, sql, entities);
         return entities;
     }
 
@@ -131,18 +130,6 @@ public class GuitarShopManager {
         String sql = builder.toString();
         System.out.println(sql);
         databaseExecution(null, sql, null);
-        /*Statement statement = null;
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            statement = connection.createStatement();
-            String sql = builder.toString();
-            System.out.println(sql);
-            statement.execute(sql);
-        } finally {
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
-        }*/
     }
 
     public void update(Entity oldEntity, Entity editedEntity) throws SQLException {
@@ -159,18 +146,6 @@ public class GuitarShopManager {
         String sql = builder.toString();
         System.out.println(sql);
         databaseExecution(null, sql, null);
-        /*Statement statement = null;
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            statement = connection.createStatement();
-            String sql = builder.toString();
-            System.out.println(sql);
-            statement.executeUpdate(sql);
-        } finally {
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
-        }*/
     }
 
     private void databaseExecution(Entity entity, String sql, List entities) throws SQLException {
@@ -179,11 +154,6 @@ public class GuitarShopManager {
         try {
             connection = getConnection();
             statement = connection.createStatement();
-            /*if (sql.contains("SELECT")) {
-                ResultSet resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                fillEntity(entity, resultSet);
-            }*/
             if (sql.contains("SELECT")) {
                 ResultSet resultSet = statement.executeQuery(sql);
                 while (resultSet.next()) {

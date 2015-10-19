@@ -47,7 +47,7 @@ public class Parser {
             //Ёлемент "LAST_NAME"
             Element LAST_NAME = document.createElement("LAST_NAME");
             LAST_NAME.appendChild(document.createTextNode("Pidisko"));
-            customer.appendChild(LAST_NAME );
+            customer.appendChild(LAST_NAME);
 
             //Ёлемент "EMAIL"
             Element EMAIL = document.createElement("EMAIL");
@@ -75,7 +75,7 @@ public class Parser {
             DOMSource domSource = new DOMSource(document);
             StreamResult streamResult = new StreamResult(new File("Customer_DATA.xml"));
 
-            transformer.transform(domSource,streamResult);
+            transformer.transform(domSource, streamResult);
             System.out.println("The file is saved...");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -93,15 +93,24 @@ public class Parser {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(xmlFile);
             document.getDocumentElement().normalize();
+            org.w3c.dom.Node node1 = document.getFirstChild();
+            while(node1 != null){
+                node1.getFirstChild();
+
+
+                node1 =   node1.getNextSibling();
+            }
+
+
+
 
             System.out.println("Root element: " + document.getDocumentElement().getNodeName());
             NodeList nodeList = document.getElementsByTagName(document.getDocumentElement().getChildNodes().item(0).getNodeName());
             System.out.println("===========================================");
             for (int i = 0; i < nodeList.getLength(); i++) {
                 org.w3c.dom.Node node = nodeList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE)
-                {
-                    Element element = (Element)node;
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
                     System.out.println("Customers #" + i + ":");
                     // System.out.println("Customer " + element.getElementsByTagName("Customer").item(i).getChildNodes().item(i).getNodeValue());
                     System.out.println("FIRST_NAME: " + element.getElementsByTagName("FIRST_NAME").item(i).getChildNodes().item(0).getNodeValue());

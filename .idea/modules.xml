@@ -3,11 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DB/DB.iml" filepath="$PROJECT_DIR$/DB/DB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GuitarShop.iml" filepath="$PROJECT_DIR$/GuitarShop.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC_DAO/JDBC_DAO.iml" filepath="$PROJECT_DIR$/JDBC_DAO/JDBC_DAO.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logic/Logic.iml" filepath="$PROJECT_DIR$/Logic/Logic.iml" />
       <module fileurl="file://$PROJECT_DIR$/Parsing/Parsing.iml" filepath="$PROJECT_DIR$/Parsing/Parsing.iml" />
       <module fileurl="file://$PROJECT_DIR$/Servlet/Servlet.iml" filepath="$PROJECT_DIR$/Servlet/Servlet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/StartProject.iml" filepath="$PROJECT_DIR$/StartProject.iml" />
     </modules>
   </component>
 </project>

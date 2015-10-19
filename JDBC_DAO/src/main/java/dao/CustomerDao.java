@@ -10,5 +10,8 @@ import java.util.List;
 public interface CustomerDao {
 
     public Entity searchById(int id) throws SQLException, IOException, PropertyVetoException;
-    public List<Entity> searchByBrandAnType(String lastName, String mail) throws SQLException, IOException, PropertyVetoException;
+    public Entity searchByLogin(String login) throws SQLException;
+    public Entity searchByPassword(String pass) throws SQLException;
+    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;
+    public void insertCustomer(String firstName, String lastName, String email, String phone, String login, String pass, int status) throws PropertyVetoException, SQLException, IOException;
 }

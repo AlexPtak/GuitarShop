@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jdbc_dao</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
@@ -22,6 +23,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
         </dependency>
     </dependencies>
 </project>
