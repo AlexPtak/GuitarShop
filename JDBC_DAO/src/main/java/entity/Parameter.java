@@ -1,5 +1,7 @@
 package entity;
 
+import dto.ParameterDto;
+
 import java.sql.JDBCType;
 
 public class Parameter implements Entity {
@@ -43,8 +45,10 @@ public class Parameter implements Entity {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " ");
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
         }
+        builder.append("------------------");
         return builder.toString();
     }
 
@@ -71,5 +75,14 @@ public class Parameter implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new Parameter();
+    }
+
+    @Override
+    public ParameterDto createDto() {
+        ParameterDto parameterDto = new ParameterDto();
+        parameterDto.setParameterId((Integer) values[ID]);
+        parameterDto.setParameterTypeId((Integer) values[PARAMETER_TYPE_ID]);
+        parameterDto.setValue((String) values[VALUE]);
+        return parameterDto;
     }
 }

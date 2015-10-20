@@ -1,5 +1,7 @@
 package entity;
 
+import dto.CustomerDto;
+
 import java.sql.JDBCType;
 
 public class Customer implements Entity {
@@ -16,8 +18,26 @@ public class Customer implements Entity {
     private static final int STATUS_ID = 7;
     private static final int COLUMNS_COUNT = 8;
 
-    private static final String[] COLUMNS = {"id_customer", "first_name", "last_name", "email", "phone", "login", "pass", "id_status"};
-    private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.INTEGER};
+    private static final String[] COLUMNS = {
+            "id_customer",
+            "first_name",
+            "last_name",
+            "email",
+            "phone",
+            "login",
+            "pass",
+            "id_status"
+    };
+    private static final JDBCType[] TYPES = {
+            JDBCType.INTEGER,
+            JDBCType.VARCHAR,
+            JDBCType.VARCHAR,
+            JDBCType.VARCHAR,
+            JDBCType.VARCHAR,
+            JDBCType.VARCHAR,
+            JDBCType.VARCHAR,
+            JDBCType.INTEGER
+    };
     private Object[] values = new Object[COLUMNS_COUNT];
 
     public Integer getId() {
@@ -118,5 +138,19 @@ public class Customer implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new Customer();
+    }
+
+    @Override
+    public CustomerDto createDto() {
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setCustomerId((Integer) values[ID]);
+        customerDto.setFirstName((String) values[FIRST_NAME]);
+        customerDto.setLastName((String) values[LAST_NAME]);
+        customerDto.setEmail((String) values[EMAIL]);
+        customerDto.setPhone((String) values[PHONE]);
+        customerDto.setLogin((String) values[LOGIN]);
+        customerDto.setPass((String) values[PASS]);
+        customerDto.setStatusId((Integer) values[STATUS_ID]);
+        return customerDto;
     }
 }

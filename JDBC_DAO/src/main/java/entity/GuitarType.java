@@ -1,5 +1,7 @@
 package entity;
 
+import dto.GuitarTypeDto;
+
 import java.sql.JDBCType;
 
 public class GuitarType implements Entity {
@@ -33,7 +35,11 @@ public class GuitarType implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getType());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 
@@ -60,5 +66,13 @@ public class GuitarType implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new GuitarType();
+    }
+
+    @Override
+    public GuitarTypeDto createDto() {
+        GuitarTypeDto guitarTypeDto = new GuitarTypeDto();
+        guitarTypeDto.setTypeId((Integer) values[ID]);
+        guitarTypeDto.setType((String) values[TYPE]);
+        return guitarTypeDto;
     }
 }

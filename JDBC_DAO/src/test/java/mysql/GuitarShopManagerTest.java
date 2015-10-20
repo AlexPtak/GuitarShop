@@ -1,5 +1,7 @@
 package mysql;
 
+import dao.CustomerDao;
+import dto.CustomerDto;
 import entity.Customer;
 import entity.Entity;
 import entity.ParameterType;
@@ -10,6 +12,8 @@ import org.junit.Test;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuitarShopManagerTest {
 
@@ -21,10 +25,20 @@ public class GuitarShopManagerTest {
     }
 
     @Test
+    @Ignore
     public void testSingleSelect() throws PropertyVetoException, SQLException, IOException {
         MySqlCustomerDao mySqlCustomerDao = new MySqlCustomerDao();
         Entity entity = mySqlCustomerDao.searchById(6);
         System.out.println(entity.toString());
+    }
+
+    @Test
+    @Ignore
+    public void testCreateCustomerDto() throws PropertyVetoException, IOException, SQLException {
+        CustomerDao customerDao = new MySqlCustomerDao();
+        List<CustomerDto> customerDtos = new ArrayList<CustomerDto>();
+        for (Entity elem : customerDao.getAll()) customerDtos.add((CustomerDto) elem.createDto());
+        System.out.println(customerDtos.get(0).getLastName());
     }
 
     @Test

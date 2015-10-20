@@ -1,5 +1,7 @@
 package entity;
 
+import dto.ParameterValueDto;
+
 import java.sql.JDBCType;
 
 public class ParameterValue implements Entity {
@@ -42,7 +44,11 @@ public class ParameterValue implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getValue() + " " + getParameterTypeId());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 
@@ -69,5 +75,14 @@ public class ParameterValue implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new ParameterValue();
+    }
+
+    @Override
+    public ParameterValueDto createDto() {
+        ParameterValueDto parameterValueDto = new ParameterValueDto();
+        parameterValueDto.setParameterValueId((Integer) values[ID]);
+        parameterValueDto.setValue((String) values[VALUE]);
+        parameterValueDto.setParameterTypeId((Integer) values[PARAMETER_TYPE_ID]);
+        return parameterValueDto;
     }
 }

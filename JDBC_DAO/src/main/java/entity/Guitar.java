@@ -1,5 +1,7 @@
 package entity;
 
+import dto.GuitarDto;
+
 import java.sql.JDBCType;
 
 public class Guitar implements Entity {
@@ -14,10 +16,34 @@ public class Guitar implements Entity {
     public static final int NUMBER_OF_STRINGS = 5;
     public static final int NUMBER_OF_FRETS = 6;
     public static final int STATUS_ID = 7;
-    public static final int COLUMNS_COUNT = 8;
+    public static final int BRAND_ID = 8;
+    public static final int TYPE_ID = 9;
+    public static final int COLUMNS_COUNT = 10;
 
-    private static final String[] COLUMNS = {"id_guitar", "model", "price", "country", "color", "number_of_strings", "number_of_frets", "id_guitar_status"};
-    private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.DOUBLE, JDBCType.VARCHAR, JDBCType.VARCHAR, JDBCType.SMALLINT, JDBCType.SMALLINT, JDBCType.INTEGER};
+    private static final String[] COLUMNS = {
+            "id_guitar",
+            "model",
+            "price",
+            "country",
+            "color",
+            "number_of_strings",
+            "number_of_frets",
+            "id_guitar_status",
+            "id_guitar_brand",
+            "id_guitar_type"
+    };
+    private static final JDBCType[] TYPES = {
+            JDBCType.INTEGER,
+            JDBCType.VARCHAR,
+            JDBCType.DOUBLE,
+            JDBCType.VARCHAR,
+            JDBCType.VARCHAR,
+            JDBCType.SMALLINT,
+            JDBCType.SMALLINT,
+            JDBCType.INTEGER,
+            JDBCType.INTEGER,
+            JDBCType.INTEGER
+    };
     private Object[] values = new Object[COLUMNS_COUNT];
 
     public Integer getId() {
@@ -84,6 +110,22 @@ public class Guitar implements Entity {
         values[STATUS_ID] = statusId;
     }
 
+    public Integer getBrandId() {
+        return (Integer) values[BRAND_ID];
+    }
+
+    public void setBrandId(Integer brandId) {
+        values[BRAND_ID] = brandId;
+    }
+
+    public Integer getTypeId() {
+        return (Integer) values[TYPE_ID];
+    }
+
+    public void setTypeId(Integer typeId) {
+        values[TYPE_ID] = typeId;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -118,5 +160,21 @@ public class Guitar implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new Guitar();
+    }
+
+    @Override
+    public GuitarDto createDto() {
+        GuitarDto guitarDto = new GuitarDto();
+        guitarDto.setGuitarId((Integer) values[ID]);
+        guitarDto.setModel((String) values[MODEL]);
+        guitarDto.setPrice((Double) values[PRICE]);
+        guitarDto.setCountry((String) values[COUNTRY]);
+        guitarDto.setColor((String) values[COLOR]);
+        guitarDto.setNumberOfStrings((Integer) values[NUMBER_OF_STRINGS]);
+        guitarDto.setNumberOfFrets((Integer) values[NUMBER_OF_FRETS]);
+        guitarDto.setGuitarStatusId((Integer) values[STATUS_ID]);
+        guitarDto.setGuitarBrandId((Integer) values[BRAND_ID]);
+        guitarDto.setGuitarTypeId((Integer) values[TYPE_ID]);
+        return guitarDto;
     }
 }

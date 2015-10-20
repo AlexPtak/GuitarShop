@@ -8,4 +8,5 @@ public interface Entity {
     public Object[] getValues();
     public JDBCType[] getTypes();
     public Entity getEmptyEntity();
+    public Object createDto();
 }

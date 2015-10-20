@@ -23,6 +23,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="DB" />
+        <module name="DTO" />
         <module name="JDBC_DAO" />
         <module name="Logic" />
         <module name="Parsing" />
@@ -31,12 +32,12 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="DB" target="1.5" />
+      <module name="DTO" target="1.5" />
       <module name="GuitarShop" target="1.5" />
-      <module name="JDBC_DAO" target="1.5" />
+      <module name="JDBC_DAO" target="1.6" />
       <module name="Logic" target="1.5" />
       <module name="Parsing" target="1.5" />
       <module name="Servlet" target="1.5" />
-      <module name="StartProject" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

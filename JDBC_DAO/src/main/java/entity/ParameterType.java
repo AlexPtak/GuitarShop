@@ -1,5 +1,7 @@
 package entity;
 
+import dto.ParameterTypeDto;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -70,5 +72,13 @@ public class ParameterType implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new ParameterType();
+    }
+
+    @Override
+    public ParameterTypeDto createDto() {
+        ParameterTypeDto parameterTypeDto = new ParameterTypeDto();
+        parameterTypeDto.setParameterTypeId((Integer) values[ID]);
+        parameterTypeDto.setType((String) values[TYPE]);
+        return parameterTypeDto;
     }
 }

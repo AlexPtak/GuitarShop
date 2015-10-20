@@ -1,5 +1,7 @@
 package entity;
 
+import dto.PurchaseDto;
+
 import java.sql.JDBCType;
 
 public class Purchase implements Entity {
@@ -51,7 +53,11 @@ public class Purchase implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getCount() + " " + getCustomerId() + " " + getGuitarId());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 
@@ -78,5 +84,15 @@ public class Purchase implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new Purchase();
+    }
+
+    @Override
+    public PurchaseDto createDto() {
+        PurchaseDto purchaseDto = new PurchaseDto();
+        purchaseDto.setPurchaseId((Integer) values[ID]);
+        purchaseDto.setCount((Integer) values[COUNT]);
+        purchaseDto.setCustomerId((Integer) values[CUSTOMER_ID]);
+        purchaseDto.setGuitarId((Integer) values[GUITAR_ID]);
+        return purchaseDto;
     }
 }

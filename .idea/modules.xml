@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DB/DB.iml" filepath="$PROJECT_DIR$/DB/DB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DTO/DTO.iml" filepath="$PROJECT_DIR$/DTO/DTO.iml" />
       <module fileurl="file://$PROJECT_DIR$/GuitarShop.iml" filepath="$PROJECT_DIR$/GuitarShop.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC_DAO/JDBC_DAO.iml" filepath="$PROJECT_DIR$/JDBC_DAO/JDBC_DAO.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logic/Logic.iml" filepath="$PROJECT_DIR$/Logic/Logic.iml" />

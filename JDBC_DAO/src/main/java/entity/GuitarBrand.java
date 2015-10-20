@@ -1,5 +1,7 @@
 package entity;
 
+import dto.GuitarBrandDto;
+
 import java.sql.JDBCType;
 
 public class GuitarBrand implements Entity {
@@ -33,7 +35,11 @@ public class GuitarBrand implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getId() + " " + getBrand());
+        for (int i = 0; i < getCulums().length; i++) {
+            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+            builder.append("\n");
+        }
+        builder.append("------------------");
         return builder.toString();
     }
 
@@ -60,5 +66,13 @@ public class GuitarBrand implements Entity {
     @Override
     public Entity getEmptyEntity() {
         return new GuitarBrand();
+    }
+
+    @Override
+    public GuitarBrandDto createDto() {
+        GuitarBrandDto guitarBrandDto = new GuitarBrandDto();
+        guitarBrandDto.setBrandId((Integer) values[ID]);
+        guitarBrandDto.setBrand((String) values[BRAND]);
+        return guitarBrandDto;
     }
 }
