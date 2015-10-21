@@ -11,5 +11,11 @@
 
     <artifactId>dto</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

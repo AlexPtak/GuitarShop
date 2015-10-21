@@ -10,7 +10,7 @@ public class GuitarBrand implements Entity {
 
     private static final int ID = 0;
     private static final int BRAND = 1;
-    public static final int COLUMNS_COUNT = 2;
+    private static final int COLUMNS_COUNT = 2;
 
     private static final String[] COLUMNS = {"id_guitar_brand", "brand"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR};
@@ -35,8 +35,8 @@ public class GuitarBrand implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+        for (int i = 0; i < getColumns().length; i++) {
+            builder.append(getColumns()[i] + " - " + getValues()[i] + ";");
             builder.append("\n");
         }
         builder.append("------------------");
@@ -49,7 +49,7 @@ public class GuitarBrand implements Entity {
     }
 
     @Override
-    public String[] getCulums() {
+    public String[] getColumns() {
         return COLUMNS;
     }
 

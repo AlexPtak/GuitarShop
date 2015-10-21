@@ -7,20 +7,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.JDBCType;
 
-@XmlRootElement
 public class ParameterType implements Entity {
 
     private static final String TABLE = "guitar_shop.parameter_type";
 
     private static final int ID = 0;
     private static final int TYPE = 1;
-    public static final int COLUMNS_COUNT = 2;
+    private static final int COLUMNS_COUNT = 2;
 
     private static final String[] COLUMNS = {"id_parameter_type", "type"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR};
     private Object[] values = new Object[COLUMNS_COUNT];
 
-    @XmlAttribute
     public Integer getId() {
         return (Integer) values[ID];
     }
@@ -29,7 +27,6 @@ public class ParameterType implements Entity {
         values[ID] = id;
     }
 
-    @XmlElement
     public String getType() {
         return (String) values[TYPE];
     }
@@ -41,8 +38,8 @@ public class ParameterType implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+        for (int i = 0; i < getColumns().length; i++) {
+            builder.append(getColumns()[i] + " - " + getValues()[i] + ";");
             builder.append("\n");
         }
         builder.append("------------------");
@@ -55,7 +52,7 @@ public class ParameterType implements Entity {
     }
 
     @Override
-    public String[] getCulums() {
+    public String[] getColumns() {
         return COLUMNS;
     }
 

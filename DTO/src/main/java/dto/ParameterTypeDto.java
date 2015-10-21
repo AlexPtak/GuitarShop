@@ -1,5 +1,10 @@
 package dto;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ParameterTypeDto {
 
     private int parameterTypeId;
@@ -9,6 +14,7 @@ public class ParameterTypeDto {
         return parameterTypeId;
     }
 
+    @XmlAttribute
     public void setParameterTypeId(int parameterTypeId) {
         this.parameterTypeId = parameterTypeId;
     }
@@ -17,6 +23,7 @@ public class ParameterTypeDto {
         return type;
     }
 
+    @XmlElement
     public void setType(String type) {
         this.type = type;
     }

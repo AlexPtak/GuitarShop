@@ -48,14 +48,14 @@ public class GuitarShopManager {
     public Entity singleSelect(Entity entity, String addToWhere) throws SQLException {
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT ");
-        for (int i = 0; i < entity.getCulums().length; i++) builder.append(entity.getCulums()[i] + ", ");
+        for (int i = 0; i < entity.getColumns().length; i++) builder.append(entity.getColumns()[i] + ", ");
         builder.delete(builder.length() - 2, builder.length());
         builder.append(" FROM " + entity.getTable());
         builder.append(" WHERE ");
         for (int i = 0; i < entity.getValues().length; i++) {
             Object value = entity.getValues()[i];
             if (value == null) continue;
-            builder.append(entity.getCulums()[i] + " = " + prepareValue(value, entity.getTypes()[i]) + ";");
+            builder.append(entity.getColumns()[i] + " = " + prepareValue(value, entity.getTypes()[i]) + ";");
             break;
         }
         Statement statement = null;
@@ -82,14 +82,14 @@ public class GuitarShopManager {
         StringBuilder builder = new StringBuilder();
         ArrayList<Entity> entities = new ArrayList<Entity>();
         builder.append("SELECT ");
-        for (int i = 0; i < entity.getCulums().length; i++) builder.append(entity.getCulums()[i] + ", ");
+        for (int i = 0; i < entity.getColumns().length; i++) builder.append(entity.getColumns()[i] + ", ");
         builder.delete(builder.length() - 2, builder.length());
         builder.append(" FROM " + entity.getTable());
         builder.append(" WHERE ");
         for (int i = 0; i < entity.getValues().length; i++) {
             Object value = entity.getValues()[i];
             if (value == null) continue;
-            builder.append(entity.getCulums()[i] + " = " + prepareValue(value, entity.getTypes()[i]) + " AND ");
+            builder.append(entity.getColumns()[i] + " = " + prepareValue(value, entity.getTypes()[i]) + " AND ");
         }
         builder.delete(builder.length() - 5, builder.length());
         builder.append(";");
@@ -103,7 +103,7 @@ public class GuitarShopManager {
         StringBuilder builder = new StringBuilder();
         ArrayList<Entity> entities = new ArrayList<Entity>();
         builder.append("SELECT ");
-        for (int i = 0; i < entity.getCulums().length; i++) builder.append(entity.getCulums()[i] + ", ");
+        for (int i = 0; i < entity.getColumns().length; i++) builder.append(entity.getColumns()[i] + ", ");
         builder.delete(builder.length() - 2, builder.length());
         builder.append(" FROM " + entity.getTable());
         builder.append(";");
@@ -116,12 +116,12 @@ public class GuitarShopManager {
     public void insert(Entity entity) throws SQLException {
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO " + entity.getTable() + " (");
-        for (int i = 0; i < entity.getCulums().length; i++) {
-            builder.append(entity.getCulums()[i] + ", ");
+        for (int i = 0; i < entity.getColumns().length; i++) {
+            builder.append(entity.getColumns()[i] + ", ");
         }
         builder.delete(builder.length() - 2, builder.length());
         builder.append(") VALUES(");
-        for (int i = 0; i < entity.getCulums().length; i++) {
+        for (int i = 0; i < entity.getColumns().length; i++) {
             Object value = entity.getValues()[i];
             builder.append(prepareValue(value, entity.getTypes()[i]) + ", ");
         }
@@ -135,14 +135,14 @@ public class GuitarShopManager {
     public void update(Entity oldEntity, Entity editedEntity) throws SQLException {
         StringBuilder builder = new StringBuilder();
         builder.append("UPDATE " + oldEntity.getTable() + " SET ");
-        for (int i = 0; i < editedEntity.getCulums().length; i++) {
+        for (int i = 0; i < editedEntity.getColumns().length; i++) {
             Object value = editedEntity.getValues()[i];
             if (value == null) continue;
-            builder.append(editedEntity.getCulums()[i] + " = " + prepareValue(value, editedEntity.getTypes()[i]) + ", ");
+            builder.append(editedEntity.getColumns()[i] + " = " + prepareValue(value, editedEntity.getTypes()[i]) + ", ");
         }
         builder.delete(builder.length() - 2, builder.length());
         final int primeryKey = 0;
-        builder.append(" WHERE " + oldEntity.getCulums()[primeryKey] + " = " + editedEntity.getValues()[primeryKey] + ";");
+        builder.append(" WHERE " + oldEntity.getColumns()[primeryKey] + " = " + editedEntity.getValues()[primeryKey] + ";");
         String sql = builder.toString();
         System.out.println(sql);
         databaseExecution(null, sql, null);
@@ -185,7 +185,7 @@ public class GuitarShopManager {
     }
 
     private void fillEntity(Entity entity, ResultSet resultSet) throws SQLException {
-        for (int i = 0; i < entity.getCulums().length; i++) {
+        for (int i = 0; i < entity.getColumns().length; i++) {
             switch (entity.getTypes()[i]) {
                 case INTEGER:
                 case SMALLINT:

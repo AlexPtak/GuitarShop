@@ -4,7 +4,7 @@ import java.sql.JDBCType;
 
 public interface Entity {
     public String getTable();
-    public String[] getCulums();
+    public String[] getColumns();
     public Object[] getValues();
     public JDBCType[] getTypes();
     public Entity getEmptyEntity();

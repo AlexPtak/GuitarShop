@@ -12,7 +12,7 @@ public class Purchase implements Entity {
     private static final int COUNT = 1;
     private static final int CUSTOMER_ID = 2;
     private static final int GUITAR_ID = 3;
-    public static final int COLUMNS_COUNT = 4;
+    private static final int COLUMNS_COUNT = 4;
 
     private static final String[] COLUMNS = {"id_purchase", "count", "id_customer", "id_guitar"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.SMALLINT, JDBCType.INTEGER, JDBCType.INTEGER};
@@ -53,8 +53,8 @@ public class Purchase implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+        for (int i = 0; i < getColumns().length; i++) {
+            builder.append(getColumns()[i] + " - " + getValues()[i] + ";");
             builder.append("\n");
         }
         builder.append("------------------");
@@ -67,7 +67,7 @@ public class Purchase implements Entity {
     }
 
     @Override
-    public String[] getCulums() {
+    public String[] getColumns() {
         return COLUMNS;
     }
 

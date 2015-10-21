@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PurchaseDao {
+public interface CustomerStatusDao {
 
     public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException;
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;

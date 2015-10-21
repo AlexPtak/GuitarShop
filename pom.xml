@@ -15,7 +15,7 @@
         <module>Parsing</module>
         <module>Servlet</module>
         <module>DTO</module>
-        <module>DTO</module>
+        <module>Utils</module>
     </modules>
 
     <dependencyManagement>

@@ -1,6 +1,7 @@
-import dao.ParameterTypeDao;
+import dto.ParameterTypeDto;
 import entity.Entity;
-import mysql.MySqlParameterTypeDao;
+import services.GetParameterTypes;
+import xmlbuilder.XmlBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +17,14 @@ public class GetParameterTypesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
+        GetParameterTypes getParameterTypes = new GetParameterTypes();
+        XmlBuilder xmlBuilder = new XmlBuilder();
         try {
-            ParameterTypeDao mySqlParameterTypeDao = new MySqlParameterTypeDao();
-            for (Entity elem : mySqlParameterTypeDao.getAll()) writer.println(elem.toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
+            for (ParameterTypeDto elem : getParameterTypes.getParameterTypes()) xmlBuilder.buildXmlWithJaxb(elem, System.out);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
-        } finally {
-            writer.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

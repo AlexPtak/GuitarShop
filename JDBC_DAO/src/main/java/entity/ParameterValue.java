@@ -11,7 +11,7 @@ public class ParameterValue implements Entity {
     private static final int ID = 0;
     private static final int VALUE = 2;
     private static final int PARAMETER_TYPE_ID = 2;
-    public static final int COLUMNS_COUNT = 3;
+    private static final int COLUMNS_COUNT = 3;
 
     private static final String[] COLUMNS = {"id_parameter_value", "value", "parameter_type_id"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.VARCHAR, JDBCType.INTEGER};
@@ -44,8 +44,8 @@ public class ParameterValue implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+        for (int i = 0; i < getColumns().length; i++) {
+            builder.append(getColumns()[i] + " - " + getValues()[i] + ";");
             builder.append("\n");
         }
         builder.append("------------------");
@@ -58,7 +58,7 @@ public class ParameterValue implements Entity {
     }
 
     @Override
-    public String[] getCulums() {
+    public String[] getColumns() {
         return COLUMNS;
     }
 

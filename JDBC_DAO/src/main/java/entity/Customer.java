@@ -107,8 +107,8 @@ public class Customer implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+        for (int i = 0; i < getColumns().length; i++) {
+            builder.append(getColumns()[i] + " - " + getValues()[i] + ";");
             builder.append("\n");
         }
         builder.append("------------------");
@@ -121,7 +121,7 @@ public class Customer implements Entity {
     }
 
     @Override
-    public String[] getCulums() {
+    public String[] getColumns() {
         return COLUMNS;
     }
 

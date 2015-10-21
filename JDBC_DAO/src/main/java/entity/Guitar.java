@@ -6,19 +6,19 @@ import java.sql.JDBCType;
 
 public class Guitar implements Entity {
 
-    public static final String TABLE = "guitar_shop.guitar";
+    private static final String TABLE = "guitar_shop.guitar";
 
-    public static final int ID = 0;
-    public static final int MODEL = 1;
-    public static final int PRICE = 2;
-    public static final int COUNTRY = 3;
-    public static final int COLOR = 4;
-    public static final int NUMBER_OF_STRINGS = 5;
-    public static final int NUMBER_OF_FRETS = 6;
-    public static final int STATUS_ID = 7;
-    public static final int BRAND_ID = 8;
-    public static final int TYPE_ID = 9;
-    public static final int COLUMNS_COUNT = 10;
+    private static final int ID = 0;
+    private static final int MODEL = 1;
+    private static final int PRICE = 2;
+    private static final int COUNTRY = 3;
+    private static final int COLOR = 4;
+    private static final int NUMBER_OF_STRINGS = 5;
+    private static final int NUMBER_OF_FRETS = 6;
+    private static final int STATUS_ID = 7;
+    private static final int BRAND_ID = 8;
+    private static final int TYPE_ID = 9;
+    private static final int COLUMNS_COUNT = 10;
 
     private static final String[] COLUMNS = {
             "id_guitar",
@@ -129,8 +129,8 @@ public class Guitar implements Entity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCulums().length; i++) {
-            builder.append(getCulums()[i] + " - " + getValues()[i] + ";");
+        for (int i = 0; i < getColumns().length; i++) {
+            builder.append(getColumns()[i] + " - " + getValues()[i] + ";");
             builder.append("\n");
         }
         builder.append("------------------");
@@ -143,7 +143,7 @@ public class Guitar implements Entity {
     }
 
     @Override
-    public String[] getCulums() {
+    public String[] getColumns() {
         return COLUMNS;
     }
 
