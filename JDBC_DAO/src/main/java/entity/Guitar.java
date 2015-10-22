@@ -163,7 +163,7 @@ public class Guitar implements Entity {
     }
 
     @Override
-    public GuitarDto createDto() {
+    public Object createDto() {
         GuitarDto guitarDto = new GuitarDto();
         guitarDto.setGuitarId((Integer) values[ID]);
         guitarDto.setModel((String) values[MODEL]);

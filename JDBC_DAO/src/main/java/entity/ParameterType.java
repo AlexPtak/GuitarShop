@@ -2,9 +2,6 @@ package entity;
 
 import dto.ParameterTypeDto;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.JDBCType;
 
 public class ParameterType implements Entity {

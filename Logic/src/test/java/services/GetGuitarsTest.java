@@ -8,8 +8,6 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
-
 public class GetGuitarsTest {
 
     @Test

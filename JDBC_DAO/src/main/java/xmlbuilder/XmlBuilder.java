@@ -3,23 +3,19 @@ package xmlbuilder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
-import java.io.PrintStream;
-import java.io.Writer;
+import java.io.StringWriter;
 
 public class XmlBuilder {
 
-    public void buildXmlWithJaxb(Object dto, PrintStream printStream) {
-        try {
-            JAXBContext context = JAXBContext.newInstance(dto.getClass());
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(dto, printStream);
-        } catch (PropertyException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
+    public String buildXmlWithJaxb(Object dto) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(dto.getClass());
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(dto, writer);
+        System.out.println(writer.toString());
+        return writer.toString();
     }
 
 //    public void buildXmlWithDom(List<Entity> entities) throws ParserConfigurationException, TransformerException {

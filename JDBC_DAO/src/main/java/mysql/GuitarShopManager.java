@@ -67,7 +67,6 @@ public class GuitarShopManager {
             System.out.println(sql);
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
-                //resultSet.next();
                 fillEntity(entity, resultSet);
                 return entity;
             } else return null;

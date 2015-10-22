@@ -3,25 +3,36 @@ package services;
 import dao.ParameterTypeDao;
 import dto.ParameterTypeDto;
 import entity.Entity;
+import forJaxb.ParameterTypes;
 import mysql.MySqlParameterTypeDao;
+import xmlbuilder.XmlBuilder;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetParameterTypes {
+public class GetParameterTypes implements GetCatalog<ParameterTypeDto> {
 
-    public ParameterTypeDto getParameterType(int id) throws PropertyVetoException, IOException, SQLException {
-        ParameterTypeDao parameterTypeDao = new MySqlParameterTypeDao();
-        return (ParameterTypeDto) parameterTypeDao.searchById(id).createDto();
-    }
-
-    public List<ParameterTypeDto> getParameterTypes() throws PropertyVetoException, IOException, SQLException {
+    @Override
+    public List<ParameterTypeDto> getCatalog() throws PropertyVetoException, IOException, SQLException {
         ParameterTypeDao parameterTypeDao = new MySqlParameterTypeDao();
         List<ParameterTypeDto> parameterTypeDtos = new ArrayList<ParameterTypeDto>();
         for (Entity elem : parameterTypeDao.getAll()) parameterTypeDtos.add((ParameterTypeDto) elem.createDto());
         return parameterTypeDtos;
+    }
+
+    @Override
+    public void getCatalogForServlet(HttpServletResponse response) throws IOException, PropertyVetoException, SQLException, JAXBException {
+        PrintWriter writer = response.getWriter();
+        XmlBuilder xmlBuilder = new XmlBuilder();
+        ParameterTypes parameterTypes = new ParameterTypes();
+        parameterTypes.setParameterTypeDtos(getCatalog());
+        String parameterTypeXmlString = xmlBuilder.buildXmlWithJaxb(parameterTypes);
+        writer.print(parameterTypeXmlString);
     }
 }

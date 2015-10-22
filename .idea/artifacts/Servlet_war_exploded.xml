@@ -9,6 +9,7 @@
           <element id="module-output" name="JDBC_DAO" />
           <element id="module-output" name="DTO" />
           <element id="module-output" name="Logic" />
+          <element id="module-output" name="Utils" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />

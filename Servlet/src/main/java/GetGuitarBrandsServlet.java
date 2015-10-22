@@ -1,4 +1,4 @@
-import services.GetParameterTypes;
+import services.GetGuitarBrands;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,13 +9,13 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class GetParameterTypesServlet extends HttpServlet {
+public class GetGuitarBrandsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GetParameterTypes getParameterTypes = new GetParameterTypes();
+        GetGuitarBrands getGuitarBrands = new GetGuitarBrands();
         try {
-            getParameterTypes.getCatalogForServlet(resp);
+            getGuitarBrands.getCatalogForServlet(resp);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } catch (SQLException e) {
