@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PARAMETER_TYPES>
+    <PARAMETER_TYPE parameter_type_id="1">
+        <TYPE>Верхняя дека</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="2">
+        <TYPE>Гриф</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="3">
+        <TYPE>Звукосниматели</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="4">
+        <TYPE>Количество ладов</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="5">
+        <TYPE>Количество струн</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="6">
+        <TYPE>Конструкция</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="7">
+        <TYPE>Корпус</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="8">
+        <TYPE>Мензура</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="9">
+        <TYPE>Накладка</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="10">
+        <TYPE>Нижняя дека</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="11">
+        <TYPE>Тип корпуса</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="12">
+        <TYPE>Форма корпуса</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="13">
+        <TYPE>Бридж/тремоло</TYPE>
+    </PARAMETER_TYPE>
+    <PARAMETER_TYPE parameter_type_id="14">
+        <TYPE>Эквалайзер/Темброблок</TYPE>
+    </PARAMETER_TYPE>
+</PARAMETER_TYPES>
