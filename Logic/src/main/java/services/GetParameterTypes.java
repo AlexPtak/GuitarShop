@@ -5,7 +5,7 @@ import dto.ParameterTypeDto;
 import entity.Entity;
 import forJaxb.ParameterTypes;
 import mysql.MySqlParameterTypeDao;
-import xmlbuilder.XmlBuilder;
+import parser.JaxbParser;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
@@ -29,10 +29,10 @@ public class GetParameterTypes implements GetCatalog<ParameterTypeDto> {
     @Override
     public void getCatalogForServlet(HttpServletResponse response) throws IOException, PropertyVetoException, SQLException, JAXBException {
         PrintWriter writer = response.getWriter();
-        XmlBuilder xmlBuilder = new XmlBuilder();
+        JaxbParser jaxbParser = new JaxbParser();
         ParameterTypes parameterTypes = new ParameterTypes();
         parameterTypes.setParameterTypeDtos(getCatalog());
-        String parameterTypeXmlString = xmlBuilder.buildXmlWithJaxb(parameterTypes);
+        String parameterTypeXmlString = jaxbParser.buildXmlWithJaxb(parameterTypes);
         writer.print(parameterTypeXmlString);
     }
 }

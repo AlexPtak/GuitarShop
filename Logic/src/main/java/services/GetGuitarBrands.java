@@ -5,7 +5,7 @@ import dto.GuitarBrandDto;
 import entity.Entity;
 import forJaxb.GuitarBrands;
 import mysql.MySqlGuitarBrandDao;
-import xmlbuilder.XmlBuilder;
+import parser.JaxbParser;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
@@ -29,10 +29,10 @@ public class GetGuitarBrands implements GetCatalog<GuitarBrandDto> {
     @Override
     public void getCatalogForServlet(HttpServletResponse response) throws IOException, PropertyVetoException, SQLException, JAXBException {
         PrintWriter writer = response.getWriter();
-        XmlBuilder xmlBuilder = new XmlBuilder();
+        JaxbParser jaxbParser = new JaxbParser();
         GuitarBrands guitarBrands = new GuitarBrands();
         guitarBrands.setGuitarBrandDtos(getCatalog());
-        String parameterTypeXmlString = xmlBuilder.buildXmlWithJaxb(guitarBrands);
+        String parameterTypeXmlString = jaxbParser.buildXmlWithJaxb(guitarBrands);
         writer.print(parameterTypeXmlString);
     }
 }
