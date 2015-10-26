@@ -12,10 +12,10 @@ import java.sql.SQLException;
 public class GetParameterTypesServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GetParameterTypes getParameterTypes = new GetParameterTypes();
         try {
-            getParameterTypes.getCatalogForServlet(resp);
+            getParameterTypes.getCatalogForServlet(response);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } catch (SQLException e) {

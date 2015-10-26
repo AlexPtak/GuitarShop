@@ -23,7 +23,7 @@ public class GuitarBrandDto {
         return brand;
     }
 
-    @XmlElement(name = "BRAND")
+    @XmlElement(name = "brand")
     public void setBrand(String brand) {
         this.brand = brand;
     }

@@ -1,5 +1,7 @@
 package services;
 
+import myUtils.MyException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import java.beans.PropertyVetoException;
@@ -10,5 +12,5 @@ import java.util.List;
 public interface GetCatalog<T> {
 
     public List<T> getCatalog() throws PropertyVetoException, IOException, SQLException;
-    public void getCatalogForServlet(HttpServletResponse response) throws IOException, PropertyVetoException, SQLException, JAXBException;
+    public void getCatalogForServlet(HttpServletResponse response) throws IOException, PropertyVetoException, SQLException, JAXBException, MyException;
 }

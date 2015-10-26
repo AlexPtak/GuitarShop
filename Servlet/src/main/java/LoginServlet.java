@@ -1,6 +1,5 @@
-import dao.CustomerDao;
-import entity.Entity;
-import mysql.MySqlCustomerDao;
+import myUtils.MyException;
+import services.Login;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,19 +13,17 @@ import java.sql.SQLException;
 public class LoginServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter writer = response.getWriter();
+        Login login = new Login();
         try {
-            CustomerDao mySqlCustomerDao = new MySqlCustomerDao();
-            Entity customer = mySqlCustomerDao.searchByLogin(req.getParameter("login"));
-            if (customer != null) {
-                if (mySqlCustomerDao.searchByPassword(req.getParameter("password")) != null) writer.print("you're in!");
-                else writer.print("wrong password!");
-            } else writer.print("wrong login!");
+            login.loginForServlet(request, response);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (MyException e) {
+            writer.print(e.getMessage());
         }
     }
 }

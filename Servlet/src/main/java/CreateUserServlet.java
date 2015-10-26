@@ -1,5 +1,5 @@
-import dao.CustomerDao;
-import mysql.MySqlCustomerDao;
+import myUtils.MyException;
+import services.CreateUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,23 +13,13 @@ import java.sql.SQLException;
 public class CreateUserServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter writer = response.getWriter();
+        CreateUser createUser = new CreateUser();
         try {
-            CustomerDao mySqlCustomerDao = new MySqlCustomerDao();
-            //req.getInputStream();
-            if (mySqlCustomerDao.searchByLogin(req.getParameter("login")) == null) {
-                CustomerDao customer = new MySqlCustomerDao();
-                customer.insertCustomer(
-                        req.getParameter("firstName"),
-                        req.getParameter("lastName"),
-                        req.getParameter("email"),
-                        req.getParameter("phone"),
-                        req.getParameter("login"),
-                        req.getParameter("password"),
-                        1);
-                writer.print("you're in!");
-            } else writer.print("please change your login beach!");
+            createUser.createUserForServlet(response, request);
+        } catch (MyException e) {
+            writer.print(e.getMessage());
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } catch (SQLException e) {

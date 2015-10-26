@@ -23,15 +23,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>GetGuitarsServlet</servlet-name>
-        <servlet-class>GetGuitarsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetGuitarsServlet</servlet-name>
-        <url-pattern>/GetGuitarsServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>LoginServlet</servlet-class>
     </servlet>
@@ -47,6 +38,15 @@
     <servlet-mapping>
         <servlet-name>GetGuitarBrandsServlet</servlet-name>
         <url-pattern>/GetGuitarBrandsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetCustomersServlet</servlet-name>
+        <servlet-class>GetCustomersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetCustomersServlet</servlet-name>
+        <url-pattern>/GetCustomersServlet</url-pattern>
     </servlet-mapping>
     
 </web-app>

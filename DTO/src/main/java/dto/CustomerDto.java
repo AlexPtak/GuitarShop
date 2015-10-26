@@ -1,5 +1,10 @@
 package dto;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "CUSTOMER")
 public class CustomerDto {
 
     private int customerId;
@@ -15,6 +20,7 @@ public class CustomerDto {
         return customerId;
     }
 
+    @XmlAttribute(name = "customer_id")
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
@@ -23,6 +29,7 @@ public class CustomerDto {
         return firstName;
     }
 
+    @XmlElement(name = "first_name")
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -31,6 +38,7 @@ public class CustomerDto {
         return lastName;
     }
 
+    @XmlElement(name = "last_name")
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -39,6 +47,7 @@ public class CustomerDto {
         return email;
     }
 
+    @XmlElement(name = "email")
     public void setEmail(String email) {
         this.email = email;
     }
@@ -47,6 +56,7 @@ public class CustomerDto {
         return phone;
     }
 
+    @XmlElement(name = "phone")
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -55,6 +65,7 @@ public class CustomerDto {
         return login;
     }
 
+    @XmlElement(name = "login")
     public void setLogin(String login) {
         this.login = login;
     }
@@ -63,6 +74,7 @@ public class CustomerDto {
         return pass;
     }
 
+    @XmlElement(name = "pass")
     public void setPass(String pass) {
         this.pass = pass;
     }
@@ -71,6 +83,7 @@ public class CustomerDto {
         return statusId;
     }
 
+    @XmlElement(name = "status_id")
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }

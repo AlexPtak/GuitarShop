@@ -23,7 +23,7 @@ public class ParameterTypeDto {
         return type;
     }
 
-    @XmlElement(name = "TYPE")
+    @XmlElement(name = "type")
     public void setType(String type) {
         this.type = type;
     }

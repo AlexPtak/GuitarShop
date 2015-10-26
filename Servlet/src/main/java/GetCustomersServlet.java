@@ -1,27 +1,28 @@
-import dao.GuitarDao;
-import entity.Entity;
-import mysql.MySqlGuitarDao;
+import services.GetCustomers;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-public class GetGuitarsServlet extends HttpServlet {
+public class GetCustomersServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        GetCustomers customers = new GetCustomers();
+        PrintWriter writer = response.getWriter();
         try {
-            GuitarDao guitarDao = new MySqlGuitarDao();
-            for (Entity elem : guitarDao.getAll()) writer.print(elem.toString());
+            customers.getCatalogForServlet(response);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
     }

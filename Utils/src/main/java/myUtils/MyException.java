@@ -6,7 +6,8 @@ public class MyException extends Exception {
         super(s);
     }
 
-    public String getXmlMassage() {
+    @Override
+    public String getMessage() {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
         builder.append("<exception>" + super.getMessage() + "</exception>");

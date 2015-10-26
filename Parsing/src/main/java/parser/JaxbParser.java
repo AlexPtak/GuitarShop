@@ -1,11 +1,13 @@
-package xmlbuilder;
+package parser;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.StringReader;
 import java.io.StringWriter;
 
-public class XmlBuilder {
+public class JaxbParser {
 
     public String buildXmlWithJaxb(Object dto) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(dto.getClass());
@@ -16,6 +18,14 @@ public class XmlBuilder {
         marshaller.marshal(dto, writer);
         System.out.println(writer.toString());
         return writer.toString();
+    }
+
+    public Object buildObjectWithJaxb(Object object, String xml) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        StringReader reader = new StringReader(xml);
+        object = unmarshaller.unmarshal(reader);
+        return object;
     }
 
 //    public void buildXmlWithDom(List<Entity> entities) throws ParserConfigurationException, TransformerException {
