@@ -13,7 +13,7 @@ public class GuitarStatus implements Entity {
     private static final int DESC = 2;
     private static final int COLUMNS_COUNT = 3;
 
-    private static final String[] COLUMNS = {"id_status", "status", "desc"};
+    private static final String[] COLUMNS = {"id_status", "status", "description"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.CHAR, JDBCType.VARCHAR};
     private Object[] values = new Object[COLUMNS_COUNT];
 
@@ -25,8 +25,8 @@ public class GuitarStatus implements Entity {
         values[ID] = id;
     }
 
-    public Character getStatus() {
-        return (Character) values[STATUS];
+    public String getStatus() {
+        return (String) values[STATUS];
     }
 
     public void setStatus(Character status) {

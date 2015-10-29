@@ -11,5 +11,6 @@ public interface GuitarBrandDao {
 
     public Entity selectById(int id) throws SQLException, IOException, PropertyVetoException;
     public List<Entity> selectByBrand(String brand) throws SQLException, IOException, PropertyVetoException;
+    public String getBrandNameById(int id) throws SQLException;
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;
 }

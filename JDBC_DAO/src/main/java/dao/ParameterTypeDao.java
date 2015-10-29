@@ -10,5 +10,6 @@ import java.util.List;
 public interface ParameterTypeDao {
 
     public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException;
+    public String getTypeById(int id) throws SQLException;
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;
 }

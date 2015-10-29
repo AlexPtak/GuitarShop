@@ -25,10 +25,10 @@ public class GuitarShopManagerTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void testSingleSelect() throws PropertyVetoException, SQLException, IOException {
         MySqlCustomerDao mySqlCustomerDao = new MySqlCustomerDao();
-        Entity entity = mySqlCustomerDao.searchById(6);
+        Entity entity = mySqlCustomerDao.searchById(2);
         System.out.println(entity.toString());
     }
 

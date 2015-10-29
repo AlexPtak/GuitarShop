@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ParameterDao {
 
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException;
+    public List<Entity> searchById(int guitarId) throws SQLException;
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;
 }

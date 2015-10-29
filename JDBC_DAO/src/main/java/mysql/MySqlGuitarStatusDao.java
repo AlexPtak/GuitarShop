@@ -25,6 +25,14 @@ public class MySqlGuitarStatusDao implements GuitarStatusDao {
     }
 
     @Override
+    public String getStatusById(int id) throws SQLException {
+        GuitarStatus guitarStatus = new GuitarStatus();
+        guitarStatus.setId(id);
+        GuitarStatus selectedGuitarStatus = (GuitarStatus) guitarShopManager.singleSelect(guitarStatus, null);
+        return selectedGuitarStatus.getStatus();
+    }
+
+    @Override
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
         GuitarStatus guitarStatus = new GuitarStatus();
         return guitarShopManager.selectAll(guitarStatus);

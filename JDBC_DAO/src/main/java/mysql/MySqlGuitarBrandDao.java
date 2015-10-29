@@ -32,6 +32,14 @@ public class MySqlGuitarBrandDao implements GuitarBrandDao {
     }
 
     @Override
+    public String getBrandNameById(int id) throws SQLException {
+        GuitarBrand guitarBrand = new GuitarBrand();
+        guitarBrand.setId(id);
+        GuitarBrand selectedGuitarBrand = (GuitarBrand) guitarShopManager.singleSelect(guitarBrand, null);
+        return selectedGuitarBrand.getBrand();
+    }
+
+    @Override
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
         GuitarBrand guitarBrand = new GuitarBrand();
         return guitarShopManager.selectAll(guitarBrand);

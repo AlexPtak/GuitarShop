@@ -25,6 +25,14 @@ public class MySqlParameterTypeDao implements ParameterTypeDao {
     }
 
     @Override
+    public String getTypeById(int id) throws SQLException {
+        ParameterType parameterType = new ParameterType();
+        parameterType.setId(id);
+        ParameterType selectedParameterType = (ParameterType) guitarShopManager.singleSelect(parameterType, null);
+        return selectedParameterType.getType();
+    }
+
+    @Override
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
         ParameterType parameterType = new ParameterType();
         return guitarShopManager.selectAll(parameterType);

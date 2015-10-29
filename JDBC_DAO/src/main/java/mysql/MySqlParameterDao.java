@@ -18,10 +18,10 @@ public class MySqlParameterDao implements ParameterDao {
     }
 
     @Override
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException {
+    public List<Entity> searchById(int guitarId) throws SQLException {
         Parameter parameter = new Parameter();
-        parameter.setId(id);
-        return guitarShopManager.singleSelect(parameter, null);
+        parameter.setId(guitarId);
+        return guitarShopManager.select(parameter, null);
     }
 
     @Override

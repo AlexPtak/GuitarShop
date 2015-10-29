@@ -13,7 +13,7 @@ public class Parameter implements Entity {
     private static final int VALUE = 2;
     private static final int COLUMNS_COUNT = 3;
 
-    private static final String[] COLUMNS = {"id_parameter", "id_parameter_type", "value"};
+    private static final String[] COLUMNS = {"id_guitar", "id_parameter_type", "value"};
     private static final JDBCType[] TYPES = {JDBCType.INTEGER, JDBCType.INTEGER, JDBCType.VARCHAR};
     private Object[] values = new Object[COLUMNS_COUNT];
 
@@ -80,7 +80,7 @@ public class Parameter implements Entity {
     @Override
     public ParameterDto createDto() {
         ParameterDto parameterDto = new ParameterDto();
-        parameterDto.setParameterId((Integer) values[ID]);
+        parameterDto.setGuitarId((Integer) values[ID]);
         parameterDto.setParameterTypeId((Integer) values[PARAMETER_TYPE_ID]);
         parameterDto.setValue((String) values[VALUE]);
         return parameterDto;

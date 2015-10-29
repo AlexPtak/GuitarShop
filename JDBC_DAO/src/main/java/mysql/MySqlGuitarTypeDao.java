@@ -25,6 +25,14 @@ public class MySqlGuitarTypeDao implements GuitarTypeDao {
     }
 
     @Override
+    public String getTypeNameById(int id) throws SQLException {
+        GuitarType guitarType = new GuitarType();
+        guitarType.setId(id);
+        GuitarType selectedGuitarType = (GuitarType) guitarShopManager.singleSelect(guitarType, null);
+        return selectedGuitarType.getType();
+    }
+
+    @Override
     public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
         GuitarType guitarType = new GuitarType();
         return guitarShopManager.selectAll(guitarType);
