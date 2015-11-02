@@ -122,7 +122,7 @@ public class FullGuitarDto {
         for (Map.Entry<String, String> elem : getParameterTypeValue().entrySet()) {
             String type = elem.getKey();
             String value = elem.getValue();
-            builder.append(type + " " + value + "\n");
+            builder.append(type + " - " + value + "\n");
         }
 
         return builder.toString();

@@ -1,58 +1,65 @@
 package mysql;
 
 import dao.CustomerDao;
+import dto.CustomerDto;
 import entity.Customer;
 import entity.Entity;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlCustomerDao implements CustomerDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MySqlCustomerDao() throws PropertyVetoException, SQLException, IOException {
+    public MySqlCustomerDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
     }
 
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException {
+    public CustomerDto searchById(int id) throws GuitarShopException {
         Customer customer = new Customer();
         customer.setId(id);
-        return guitarShopManager.singleSelect(customer, null);
+        return (CustomerDto) guitarShopManager.singleSelect(customer).createDto();
     }
 
     @Override
-    public Entity searchByLogin(String login) throws SQLException {
+    public CustomerDto searchByLogin(String login) throws GuitarShopException {
         Customer customer = new Customer();
         customer.setLogin(login);
-        return guitarShopManager.singleSelect(customer, null);
+        Entity selectedEntity = guitarShopManager.singleSelect(customer);
+        if (selectedEntity != null) return (CustomerDto) selectedEntity.createDto();
+        return null;
     }
 
     @Override
-    public Entity searchByPassword(String pass) throws SQLException {
+    public CustomerDto searchByPassword(String pass) throws GuitarShopException {
         Customer customer = new Customer();
         customer.setPass(pass);
-        return guitarShopManager.singleSelect(customer, null);
+        Entity selectedEntity = guitarShopManager.singleSelect(customer);
+        if (selectedEntity != null) return (CustomerDto) selectedEntity.createDto();
+        return null;
     }
 
     @Override
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
+    public List<CustomerDto> getAll() throws GuitarShopException {
         Customer customer = new Customer();
-        return guitarShopManager.selectAll(customer);
+        List<Entity> entities = guitarShopManager.selectAll(customer);
+        List<CustomerDto> customerDtos = new ArrayList<CustomerDto>();
+        for (Entity elem : entities) customerDtos.add((CustomerDto) elem.createDto());
+        return customerDtos;
     }
 
     @Override
-    public void insertCustomer(String firstName, String lastName, String email, String phone, String login, String pass, int status) throws PropertyVetoException, SQLException, IOException {
+    public void insertCustomer(CustomerDto customerDto) throws GuitarShopException {
         Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setEmail(email);
-        customer.setPhone(phone);
-        customer.setLogin(login);
-        customer.setPass(pass);
-        customer.setStatusId(status);
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setEmail(customerDto.getEmail());
+        customer.setPhone(customerDto.getPhone());
+        customer.setLogin(customerDto.getLogin());
+        customer.setPass(customerDto.getPass());
+        customer.setStatusId(1);
         guitarShopManager.insert(customer);
     }
 }

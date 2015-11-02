@@ -1,32 +1,36 @@
 package mysql;
 
 import dao.ParameterValueDao;
+import dto.ParameterValueDto;
 import entity.Entity;
 import entity.ParameterValue;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MqSqlParameterValueDao implements ParameterValueDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MqSqlParameterValueDao() throws PropertyVetoException, SQLException, IOException {
+    public MqSqlParameterValueDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
+
     }
 
     @Override
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException {
+    public ParameterValueDto searchById(int id) throws GuitarShopException {
         ParameterValue parameterValue = new ParameterValue();
         parameterValue.setId(id);
-        return guitarShopManager.singleSelect(parameterValue, null);
+        return (ParameterValueDto) guitarShopManager.singleSelect(parameterValue).createDto();
     }
 
     @Override
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
+    public List<ParameterValueDto> getAll() throws GuitarShopException {
         ParameterValue parameterValue = new ParameterValue();
-        return guitarShopManager.selectAll(parameterValue);
+        List<Entity> entities = guitarShopManager.selectAll(parameterValue);
+        List<ParameterValueDto> parameterValueDtos = new ArrayList<ParameterValueDto>();
+        for (Entity elem : entities) parameterValueDtos.add((ParameterValueDto) elem.createDto());
+        return parameterValueDtos;
     }
 }

@@ -1,40 +1,43 @@
 package mysql;
 
 import dao.GuitarStatusDao;
+import dto.GuitarStatusDto;
 import entity.Entity;
 import entity.GuitarStatus;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlGuitarStatusDao implements GuitarStatusDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MySqlGuitarStatusDao() throws PropertyVetoException, SQLException, IOException {
+    public MySqlGuitarStatusDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
     }
 
     @Override
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException {
+    public GuitarStatusDto searchById(int id) throws GuitarShopException {
         GuitarStatus guitarStatus = new GuitarStatus();
         guitarStatus.setId(id);
-        return guitarShopManager.singleSelect(guitarStatus, null);
+        return (GuitarStatusDto) guitarShopManager.singleSelect(guitarStatus).createDto();
     }
 
     @Override
-    public String getStatusById(int id) throws SQLException {
+    public String getStatusById(int id) throws GuitarShopException {
         GuitarStatus guitarStatus = new GuitarStatus();
         guitarStatus.setId(id);
-        GuitarStatus selectedGuitarStatus = (GuitarStatus) guitarShopManager.singleSelect(guitarStatus, null);
+        GuitarStatus selectedGuitarStatus = (GuitarStatus) guitarShopManager.singleSelect(guitarStatus);
         return selectedGuitarStatus.getStatus();
     }
 
     @Override
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
+    public List<GuitarStatusDto> getAll() throws GuitarShopException {
         GuitarStatus guitarStatus = new GuitarStatus();
-        return guitarShopManager.selectAll(guitarStatus);
+        List<Entity> entities = guitarShopManager.selectAll(guitarStatus);
+        List<GuitarStatusDto> guitarStatusDtos = new ArrayList<GuitarStatusDto>();
+        for (Entity elem : entities) guitarStatusDtos.add((GuitarStatusDto) elem.createDto());
+        return guitarStatusDtos;
     }
 }

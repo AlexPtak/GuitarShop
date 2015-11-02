@@ -97,11 +97,13 @@ public class Parser {
             document.getDocumentElement().normalize();
             org.w3c.dom.Node node1 = document.getFirstChild();
             while(node1 != null){
-                node1.getFirstChild();
-
+                org.w3c.dom.Node firstChild = node1.getFirstChild();
+                firstChild.getNodeType();
 
                 node1 =   node1.getNextSibling();
             }
+
+
 
 
 

@@ -1,32 +1,35 @@
 package mysql;
 
 import dao.CustomerStatusDao;
+import dto.GuitarStatusDto;
 import entity.CustomerStatus;
 import entity.Entity;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlCustomerStatusDao implements CustomerStatusDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MySqlCustomerStatusDao() throws PropertyVetoException, SQLException, IOException {
+    public MySqlCustomerStatusDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
     }
 
     @Override
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException {
+    public GuitarStatusDto searchById(int id) throws GuitarShopException {
         CustomerStatus customerStatus = new CustomerStatus();
         customerStatus.setId(id);
-        return guitarShopManager.singleSelect(customerStatus, null);
+        return (GuitarStatusDto) guitarShopManager.singleSelect(customerStatus).createDto();
     }
 
     @Override
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
+    public List<GuitarStatusDto> getAll() throws GuitarShopException {
         CustomerStatus customerStatus = new CustomerStatus();
-        return guitarShopManager.selectAll(customerStatus);
+        List<Entity> entities = guitarShopManager.selectAll(customerStatus);
+        List<GuitarStatusDto> guitarStatusDtos = new ArrayList<GuitarStatusDto>();
+        for (Entity elem : entities) guitarStatusDtos.add((GuitarStatusDto) elem.createDto());
+        return guitarStatusDtos;
     }
 }

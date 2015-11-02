@@ -2,9 +2,9 @@ package mysql;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import entity.Entity;
+import myUtils.GuitarShopException;
 
 import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,13 @@ public class GuitarShopManager {
     private String url = "jdbc:mysql://localhost:3306/";
     private String driver = "com.mysql.jdbc.Driver";
 
-    private GuitarShopManager() throws IOException, SQLException, PropertyVetoException {
+    private GuitarShopManager() throws GuitarShopException {
         comboPooledDataSource = new ComboPooledDataSource();
-        comboPooledDataSource.setDriverClass(driver);
+        try {
+            comboPooledDataSource.setDriverClass(driver);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }
         comboPooledDataSource.setJdbcUrl(url);
         comboPooledDataSource.setUser(user);
         comboPooledDataSource.setPassword(password);
@@ -32,7 +36,7 @@ public class GuitarShopManager {
         comboPooledDataSource.setMaxStatements(150);
     }
 
-    public static GuitarShopManager getInstance() throws IOException, SQLException, PropertyVetoException {
+    public static GuitarShopManager getInstance() throws GuitarShopException {
         if (dataSource == null) {
             dataSource = new GuitarShopManager();
             return dataSource;
@@ -41,11 +45,16 @@ public class GuitarShopManager {
         }
     }
 
-    public Connection getConnection() throws SQLException {
-        return this.comboPooledDataSource.getConnection();
+    public Connection getConnection() throws GuitarShopException {
+        try {
+            return this.comboPooledDataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Entity singleSelect(Entity entity, String addToWhere) throws SQLException {
+    public Entity singleSelect(Entity entity) throws GuitarShopException {
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT ");
         for (int i = 0; i < entity.getColumns().length; i++) builder.append(entity.getColumns()[i] + ", ");
@@ -69,15 +78,26 @@ public class GuitarShopManager {
             if (resultSet.next()) {
                 fillEntity(entity, resultSet);
                 return entity;
-            } else return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
+            if (statement != null) try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (connection != null) try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return null;
     }
 
 
-    public List<Entity> select(Entity entity, String addToWhere) throws SQLException {
+    public List<Entity> select(Entity entity) throws GuitarShopException {
         StringBuilder builder = new StringBuilder();
         ArrayList<Entity> entities = new ArrayList<Entity>();
         builder.append("SELECT ");
@@ -98,7 +118,7 @@ public class GuitarShopManager {
         return entities;
     }
 
-    public List<Entity> selectAll(Entity entity) throws SQLException {
+    public List<Entity> selectAll(Entity entity) throws GuitarShopException {
         StringBuilder builder = new StringBuilder();
         ArrayList<Entity> entities = new ArrayList<Entity>();
         builder.append("SELECT ");
@@ -112,7 +132,7 @@ public class GuitarShopManager {
         return entities;
     }
 
-    public void insert(Entity entity) throws SQLException {
+    public void insert(Entity entity) throws GuitarShopException {
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO " + entity.getTable() + " (");
         for (int i = 0; i < entity.getColumns().length; i++) {
@@ -131,7 +151,7 @@ public class GuitarShopManager {
         databaseExecution(null, sql, null);
     }
 
-    public void update(Entity oldEntity, Entity editedEntity) throws SQLException {
+    public void update(Entity oldEntity, Entity editedEntity) throws GuitarShopException {
         StringBuilder builder = new StringBuilder();
         builder.append("UPDATE " + oldEntity.getTable() + " SET ");
         for (int i = 0; i < editedEntity.getColumns().length; i++) {
@@ -147,7 +167,7 @@ public class GuitarShopManager {
         databaseExecution(null, sql, null);
     }
 
-    private void databaseExecution(Entity entity, String sql, List entities) throws SQLException {
+    private void databaseExecution(Entity entity, String sql, List entities) throws GuitarShopException {
         Statement statement = null;
         Connection connection = null;
         try {
@@ -163,9 +183,19 @@ public class GuitarShopManager {
             }
             if (sql.contains("INSERT")) statement.execute(sql);
             if (sql.contains("UPDATE")) statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
+            if (statement != null) try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (connection != null) try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -183,20 +213,32 @@ public class GuitarShopManager {
         return null;
     }
 
-    private void fillEntity(Entity entity, ResultSet resultSet) throws SQLException {
+    private void fillEntity(Entity entity, ResultSet resultSet) throws GuitarShopException {
         for (int i = 0; i < entity.getColumns().length; i++) {
             switch (entity.getTypes()[i]) {
                 case INTEGER:
                 case SMALLINT:
-                    entity.getValues()[i] = resultSet.getInt(i + 1);
+                    try {
+                        entity.getValues()[i] = resultSet.getInt(i + 1);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case DOUBLE:
-                    entity.getValues()[i] = resultSet.getDouble(i + 1);
+                    try {
+                        entity.getValues()[i] = resultSet.getDouble(i + 1);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case VARCHAR:
                 case CHAR:
                 case NVARCHAR:
-                    entity.getValues()[i] = resultSet.getString(i + 1);
+                    try {
+                        entity.getValues()[i] = resultSet.getString(i + 1);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
         }

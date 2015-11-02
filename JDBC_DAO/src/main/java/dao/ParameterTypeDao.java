@@ -1,15 +1,13 @@
 package dao;
 
-import entity.Entity;
+import dto.ParameterTypeDto;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ParameterTypeDao {
 
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException;
-    public String getTypeById(int id) throws SQLException;
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;
+    public ParameterTypeDto searchById(int id) throws GuitarShopException;
+    public String getTypeById(int id) throws GuitarShopException;
+    public List<ParameterTypeDto> getAll() throws GuitarShopException;
 }

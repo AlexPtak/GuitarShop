@@ -1,14 +1,13 @@
-import myUtils.MyException;
+import dto.CustomerDto;
+import myUtils.GuitarShopException;
 import services.CreateUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 public class CreateUserServlet extends HttpServlet {
 
@@ -16,14 +15,20 @@ public class CreateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter writer = response.getWriter();
         CreateUser createUser = new CreateUser();
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setFirstName(request.getParameter("firstName"));
+        customerDto.setLastName(request.getParameter("lastName"));
+        customerDto.setEmail(request.getParameter("email"));
+        customerDto.setPhone(request.getParameter("phone"));
+        customerDto.setLogin(request.getParameter("login"));
+        customerDto.setPass(request.getParameter("password"));
         try {
-            createUser.createUserForServlet(response, request);
-        } catch (MyException e) {
-            writer.print(e.getMessage());
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            writer.print(createUser.createUserForServlet(customerDto));
+        } catch (GuitarShopException e) {
+            writer.print(e.getXmlMassage());
+        } catch (Throwable e) {
+            GuitarShopException exception = new GuitarShopException(e);
+            writer.print(exception.getXmlMassage());
         }
     }
 }

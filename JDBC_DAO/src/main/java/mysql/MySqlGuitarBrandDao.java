@@ -1,47 +1,53 @@
 package mysql;
 
 import dao.GuitarBrandDao;
+import dto.GuitarBrandDto;
 import entity.Entity;
 import entity.GuitarBrand;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlGuitarBrandDao implements GuitarBrandDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MySqlGuitarBrandDao() throws PropertyVetoException, SQLException, IOException {
+    public MySqlGuitarBrandDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
     }
 
     @Override
-    public Entity selectById(int id) throws SQLException, IOException, PropertyVetoException {
+    public GuitarBrandDto selectById(int id) throws GuitarShopException {
         GuitarBrand guitarBrand = new GuitarBrand();
         guitarBrand.setId(id);
-        return guitarShopManager.singleSelect(guitarBrand, null);
+        return (GuitarBrandDto) guitarShopManager.singleSelect(guitarBrand).createDto();
     }
 
     @Override
-    public List<Entity> selectByBrand(String brand) throws SQLException, IOException, PropertyVetoException {
+    public List<GuitarBrandDto> selectByBrand(String brand) throws GuitarShopException {
         GuitarBrand guitarBrand = new GuitarBrand();
         guitarBrand.setBrand(brand);
-        return guitarShopManager.select(guitarBrand, null);
+        List<Entity> entities = guitarShopManager.select(guitarBrand);
+        List<GuitarBrandDto> guitarBrandDtos = new ArrayList<GuitarBrandDto>();
+        for (Entity elem : entities) guitarBrandDtos.add((GuitarBrandDto) elem.createDto());
+        return guitarBrandDtos;
     }
 
     @Override
-    public String getBrandNameById(int id) throws SQLException {
+    public String getBrandNameById(int id) throws GuitarShopException {
         GuitarBrand guitarBrand = new GuitarBrand();
         guitarBrand.setId(id);
-        GuitarBrand selectedGuitarBrand = (GuitarBrand) guitarShopManager.singleSelect(guitarBrand, null);
+        GuitarBrand selectedGuitarBrand = (GuitarBrand) guitarShopManager.singleSelect(guitarBrand);
         return selectedGuitarBrand.getBrand();
     }
 
     @Override
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
+    public List<GuitarBrandDto> getAll() throws GuitarShopException {
         GuitarBrand guitarBrand = new GuitarBrand();
-        return guitarShopManager.selectAll(guitarBrand);
+        List<Entity> entities = guitarShopManager.selectAll(guitarBrand);
+        List<GuitarBrandDto> guitarBrandDtos = new ArrayList<GuitarBrandDto>();
+        for (Entity elem : entities) guitarBrandDtos.add((GuitarBrandDto) elem.createDto());
+        return guitarBrandDtos;
     }
 }

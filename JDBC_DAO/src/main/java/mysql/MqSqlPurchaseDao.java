@@ -1,32 +1,35 @@
 package mysql;
 
 import dao.PurchaseDao;
+import dto.PurchaseDto;
 import entity.Entity;
 import entity.Purchase;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MqSqlPurchaseDao implements PurchaseDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MqSqlPurchaseDao() throws PropertyVetoException, SQLException, IOException {
+    public MqSqlPurchaseDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
     }
 
     @Override
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException {
+    public PurchaseDto searchById(int id) throws GuitarShopException {
         Purchase purchase = new Purchase();
         purchase.setId(id);
-        return guitarShopManager.singleSelect(purchase, null);
+        return (PurchaseDto) guitarShopManager.singleSelect(purchase).createDto();
     }
 
     @Override
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException {
+    public List<PurchaseDto> getAll() throws GuitarShopException {
         Purchase purchase = new Purchase();
-        return guitarShopManager.selectAll(purchase);
+        List<Entity> entities = guitarShopManager.selectAll(purchase);
+        List<PurchaseDto> purchaseDtos = new ArrayList<PurchaseDto>();
+        for (Entity elem : entities) purchaseDtos.add((PurchaseDto) elem.createDto());
+        return purchaseDtos;
     }
 }

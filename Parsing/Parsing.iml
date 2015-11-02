@@ -23,5 +23,6 @@
     <orderEntry type="module" module-name="JDBC_DAO" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1.2" level="project" />
+    <orderEntry type="module" module-name="Utils" />
   </component>
 </module>

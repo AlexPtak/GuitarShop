@@ -1,14 +1,14 @@
 package dao;
 
-import entity.Entity;
+import dto.FullGuitarDto;
+import dto.GuitarDto;
+import myUtils.GuitarShopException;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface GuitarDao {
 
-    public Entity searchById(int id) throws PropertyVetoException, SQLException, IOException;
-    public List<Entity> getAll() throws PropertyVetoException, SQLException, IOException;
+    public GuitarDto searchById(int id) throws GuitarShopException;
+    public List<GuitarDto> getAll() throws GuitarShopException;
+    public FullGuitarDto getFullGuitarById(int id) throws GuitarShopException;
 }
