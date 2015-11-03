@@ -35,13 +35,23 @@
 
     <form action="CreateUserServlet" method="post">
       <h1>Create User</h1>
-      <input type="text" value="First Name" name="firstName"/>
-      <input type="text" value="Last Name" name="lastName"/>
-      <input type="text" value="Email" name="email"/>
-      <input type="text" value="Phone" name="phone"/>
-      <input type="text" value="Login" name="login"/>
-      <input type="text" value="Password" name="password"/>
+      <%--<input type="text" value="First Name" name="firstName"/>--%>
+      <%--<input type="text" value="Last Name" name="lastName"/>--%>
+      <%--<input type="text" value="Email" name="email"/>--%>
+      <%--<input type="text" value="Phone" name="phone"/>--%>
+      <%--<input type="text" value="Login" name="login"/>--%>
+      <%--<input type="text" value="Password" name="password"/>--%>
       <input type="submit" value="create user"/>
+      <textarea name="textArea"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <CUSTOMER customer_id="4">
+          <email>chackSchuldiner@gmail.com</email>
+          <first_name>Chack</first_name>
+          <last_name>Schuldiner</last_name>
+          <login>ChackSchuldinerr</login>
+          <pass>46378</pass>
+          <phone>544681</phone>
+          <status_id>1</status_id>
+        </CUSTOMER></textarea>
     </form>
   </body>
 </html>
