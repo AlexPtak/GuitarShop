@@ -57,5 +57,23 @@
         <servlet-name>GetFullGuitarsServlet</servlet-name>
         <url-pattern>/GetFullGuitarsServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetParameterValuesServlet</servlet-name>
+        <servlet-class>GetParameterValuesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetParameterValuesServlet</servlet-name>
+        <url-pattern>/GetParameterValuesServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetGuitarTypesServlet</servlet-name>
+        <servlet-class>GetGuitarTypesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetGuitarTypesServlet</servlet-name>
+        <url-pattern>/GetGuitarTypesServlet</url-pattern>
+    </servlet-mapping>
     
 </web-app>

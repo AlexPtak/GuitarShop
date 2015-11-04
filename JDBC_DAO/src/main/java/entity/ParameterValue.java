@@ -9,7 +9,7 @@ public class ParameterValue implements Entity {
     private static final String TABLE = "guitar_shop.parameter_value";
 
     private static final int ID = 0;
-    private static final int VALUE = 2;
+    private static final int VALUE = 1;
     private static final int PARAMETER_TYPE_ID = 2;
     private static final int COLUMNS_COUNT = 3;
 

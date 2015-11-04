@@ -16,9 +16,19 @@
       <input type="submit" value="get parameter types"/>
     </form>
 
+    <form action="GetParameterValuesServlet" method="get">
+      <h1>Get Parameter Values</h1>
+      <input type="submit" value="get parameter values"/>
+    </form>
+
     <form action="GetGuitarBrandsServlet" method="get">
       <h1>Get Guitar Brands</h1>
       <input type="submit" value="get guitar brands"/>
+    </form>
+
+    <form action="GetGuitarTypesServlet" method="get">
+      <h1>Get Guitar Types</h1>
+      <input type="submit" value="get guitar types"/>
     </form>
 
     <form action="GetCustomersServlet" method="get">
