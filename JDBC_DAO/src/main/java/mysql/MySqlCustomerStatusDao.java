@@ -1,7 +1,7 @@
 package mysql;
 
 import dao.CustomerStatusDao;
-import dto.GuitarStatusDto;
+import dto.CustomerStatusDto;
 import entity.CustomerStatus;
 import entity.Entity;
 import myUtils.GuitarShopException;
@@ -18,18 +18,18 @@ public class MySqlCustomerStatusDao implements CustomerStatusDao {
     }
 
     @Override
-    public GuitarStatusDto searchById(int id) throws GuitarShopException {
+    public CustomerStatusDto searchById(int id) throws GuitarShopException {
         CustomerStatus customerStatus = new CustomerStatus();
         customerStatus.setId(id);
-        return (GuitarStatusDto) guitarShopManager.singleSelect(customerStatus).createDto();
+        return (CustomerStatusDto) guitarShopManager.singleSelect(customerStatus).createDto();
     }
 
     @Override
-    public List<GuitarStatusDto> getAll() throws GuitarShopException {
+    public List<CustomerStatusDto> getAll() throws GuitarShopException {
         CustomerStatus customerStatus = new CustomerStatus();
         List<Entity> entities = guitarShopManager.selectAll(customerStatus);
-        List<GuitarStatusDto> guitarStatusDtos = new ArrayList<GuitarStatusDto>();
-        for (Entity elem : entities) guitarStatusDtos.add((GuitarStatusDto) elem.createDto());
-        return guitarStatusDtos;
+        List<CustomerStatusDto> statusDtos = new ArrayList<CustomerStatusDto>();
+        for (Entity elem : entities) statusDtos.add((CustomerStatusDto) elem.createDto());
+        return statusDtos;
     }
 }

@@ -1,12 +1,12 @@
 package dao;
 
-import dto.GuitarStatusDto;
+import dto.CustomerStatusDto;
 import myUtils.GuitarShopException;
 
 import java.util.List;
 
 public interface CustomerStatusDao {
 
-    public GuitarStatusDto searchById(int id) throws GuitarShopException;
-    public List<GuitarStatusDto> getAll() throws GuitarShopException;
+    public CustomerStatusDto searchById(int id) throws GuitarShopException;
+    public List<CustomerStatusDto> getAll() throws GuitarShopException;
 }

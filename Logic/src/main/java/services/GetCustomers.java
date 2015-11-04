@@ -1,6 +1,5 @@
 package services;
 
-import dao.CustomerDao;
 import dto.CustomerDto;
 import forJaxb.Customers;
 import myUtils.GuitarShopException;
@@ -8,22 +7,21 @@ import mysql.MySqlCustomerDao;
 import parser.JaxbParser;
 
 import javax.xml.bind.JAXBException;
-import java.util.List;
 
-public class GetCustomers implements GetCatalog<CustomerDto> {
-
-    @Override
-    public List<CustomerDto> getCatalog() throws GuitarShopException {
-        CustomerDao customerDao = new MySqlCustomerDao();
-        return customerDao.getAll();
-    }
+public class GetCustomers implements GetCatalog {
 
     @Override
     public String getCatalogInXml() throws GuitarShopException, JAXBException {
         JaxbParser jaxbParser = new JaxbParser();
         Customers customers = new Customers();
-        customers.setCustomerDtos(getCatalog());
-        String parameterTypeXmlString = jaxbParser.buildXmlWithJaxb(customers);
-        return parameterTypeXmlString.toString();
+        customers.setCustomerDtos(new MySqlCustomerDao().getAll());
+        return jaxbParser.buildXmlWithJaxb(customers);
+    }
+
+    @Override
+    public String getSingleInstanseFromCatalogById(int id) throws GuitarShopException, JAXBException {
+        JaxbParser jaxbParser = new JaxbParser();
+        CustomerDto customerDto = new MySqlCustomerDao().searchById(id);
+        return jaxbParser.buildXmlWithJaxb(customerDto);
     }
 }

@@ -39,17 +39,10 @@ public class MySqlGuitarDao implements GuitarDao {
 
     @Override
     public FullGuitarDto getFullGuitarById(int id) throws GuitarShopException {
-        
+
         FullGuitarDto fullGuitarDto = new FullGuitarDto();
         GuitarDto guitarDto = new MySqlGuitarDao().searchById(id);
-
-        fullGuitarDto.setGuitarId(guitarDto.getGuitarId());
-        fullGuitarDto.setModel(guitarDto.getModel());
-        fullGuitarDto.setPrice(guitarDto.getPrice());
-        fullGuitarDto.setCountry(guitarDto.getCountry());
-        fullGuitarDto.setColor(guitarDto.getColor());
-        fullGuitarDto.setNumberOfStrings(guitarDto.getNumberOfStrings());
-        fullGuitarDto.setNumberOfFrets(guitarDto.getNumberOfFrets());
+        fullGuitarDto.setGuitarDto(guitarDto);
 
         fullGuitarDto.setGuitarStatus(new MySqlGuitarStatusDao().getStatusById(guitarDto.getGuitarStatusId()));
         fullGuitarDto.setGuitarBrand(new MySqlGuitarBrandDao().getBrandNameById(guitarDto.getGuitarBrandId()));
@@ -68,5 +61,13 @@ public class MySqlGuitarDao implements GuitarDao {
         fullGuitarDto.setParameterTypeValue(parameterTypeValue);
 
         return fullGuitarDto;
+    }
+
+    @Override
+    public List<FullGuitarDto> getAllFullGuitar() throws GuitarShopException {
+        List<GuitarDto> guitarDtos = new MySqlGuitarDao().getAll();
+        List<FullGuitarDto> fullGuitarDtos = new ArrayList<FullGuitarDto>();
+        for (GuitarDto elem : guitarDtos) fullGuitarDtos.add(getFullGuitarById(elem.getGuitarId()));
+        return fullGuitarDtos;
     }
 }

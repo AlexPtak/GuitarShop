@@ -2,6 +2,7 @@ package parser;
 
 import dto.CustomerDto;
 import mysql.MySqlCustomerDao;
+import mysql.MySqlGuitarDao;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +17,8 @@ public class JaxbParserTest {
 
     @Test
     public void testBuildXmlWithJaxb() throws Exception {
-        jaxbParser.buildXmlWithJaxb(new MySqlCustomerDao().searchById(1));
+        //jaxbParser.buildXmlWithJaxb(new MySqlCustomerDao().searchById(1));
+        jaxbParser.buildXmlWithJaxb(new MySqlGuitarDao().getFullGuitarById(1));
     }
 
     @Test

@@ -3,10 +3,9 @@ package services;
 import myUtils.GuitarShopException;
 
 import javax.xml.bind.JAXBException;
-import java.util.List;
 
-public interface GetCatalog<T> {
+public interface GetCatalog {
 
-    public List<T> getCatalog() throws GuitarShopException;
     public String getCatalogInXml() throws GuitarShopException, JAXBException;
+    public String getSingleInstanseFromCatalogById(int id) throws GuitarShopException, JAXBException;
 }

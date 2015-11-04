@@ -1,5 +1,10 @@
 package dto;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "PARAMETER_VALUE")
 public class ParameterValueDto {
 
     private int parameterValueId;
@@ -10,6 +15,7 @@ public class ParameterValueDto {
         return parameterValueId;
     }
 
+    @XmlAttribute(name = "parameter_value_id")
     public void setParameterValueId(int parameterValueId) {
         this.parameterValueId = parameterValueId;
     }
@@ -18,6 +24,7 @@ public class ParameterValueDto {
         return value;
     }
 
+    @XmlElement(name = "value")
     public void setValue(String value) {
         this.value = value;
     }
@@ -26,6 +33,7 @@ public class ParameterValueDto {
         return parameterTypeId;
     }
 
+    @XmlElement(name = "parameter_type_id")
     public void setParameterTypeId(int parameterTypeId) {
         this.parameterTypeId = parameterTypeId;
     }

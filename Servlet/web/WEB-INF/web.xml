@@ -48,5 +48,14 @@
         <servlet-name>GetCustomersServlet</servlet-name>
         <url-pattern>/GetCustomersServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetFullGuitarsServlet</servlet-name>
+        <servlet-class>GetFullGuitarsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetFullGuitarsServlet</servlet-name>
+        <url-pattern>/GetFullGuitarsServlet</url-pattern>
+    </servlet-mapping>
     
 </web-app>

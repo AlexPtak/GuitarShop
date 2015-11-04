@@ -26,6 +26,11 @@
       <input type="submit" value="get customers"/>
     </form>
 
+    <form action="GetFullGuitarsServlet" method="get">
+      <h1>Get Full Guitar</h1>
+      <input type="submit" value="get full guitar"/>
+    </form>
+
     <form action="LoginServlet" method="post">
       <h1>Login</h1>
       <input type="text" value="Login" name="login"/>
