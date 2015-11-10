@@ -14,7 +14,7 @@ public class Login {
         if (customerDto != null) {
             if (mySqlCustomerDao.searchByPassword(password) != null) {
                 builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-                builder.append("<exception>you're in!</exception>");
+                builder.append("<massage>you're in!</massage>");
                 return builder.toString();
             }
             else throw new GuitarShopException("wrong password!");

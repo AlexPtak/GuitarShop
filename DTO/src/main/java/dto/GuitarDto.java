@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GUITAR")
 public class GuitarDto {
 
-    private int guitarId;
+    private Integer guitarId;
     private String model;
     private double price;
     private String country;
     private String color;
     private int numberOfStrings;
     private int numberOfFrets;
-    private int guitarStatusId;
-    private int guitarBrandId;
-    private int guitarTypeId;
+    private Integer guitarStatusId;
+    private Integer guitarBrandId;
+    private Integer guitarTypeId;
 
     public int getGuitarId() {
         return guitarId;
@@ -86,7 +86,7 @@ public class GuitarDto {
     }
 
     @XmlElement(name = "guitar_status_id")
-    public void setGuitarStatusId(int guitarStatusId) {
+    public void setGuitarStatusId(Integer guitarStatusId) {
         this.guitarStatusId = guitarStatusId;
     }
 
@@ -95,7 +95,7 @@ public class GuitarDto {
     }
 
     @XmlElement(name = "guitar_brand_id")
-    public void setGuitarBrandId(int guitarBrandId) {
+    public void setGuitarBrandId(Integer guitarBrandId) {
         this.guitarBrandId = guitarBrandId;
     }
 
@@ -104,7 +104,7 @@ public class GuitarDto {
     }
 
     @XmlElement(name = "guitar_type_id")
-    public void setGuitarTypeId(int guitarTypeId) {
+    public void setGuitarTypeId(Integer guitarTypeId) {
         this.guitarTypeId = guitarTypeId;
     }
 }

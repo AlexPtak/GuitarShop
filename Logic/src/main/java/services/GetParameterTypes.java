@@ -4,24 +4,20 @@ import dto.ParameterTypeDto;
 import forJaxb.ParameterTypes;
 import myUtils.GuitarShopException;
 import mysql.MySqlParameterTypeDao;
-import parser.JaxbParser;
 
 import javax.xml.bind.JAXBException;
 
-public class GetParameterTypes implements GetCatalog {
+public class GetParameterTypes implements GetCatalog<ParameterTypeDto> {
 
     @Override
-    public String getCatalogInXml() throws GuitarShopException, JAXBException {
-        JaxbParser jaxbParser = new JaxbParser();
+    public ParameterTypes getCatalogInXml() throws GuitarShopException, JAXBException {
         ParameterTypes parameterTypes = new ParameterTypes();
         parameterTypes.setParameterTypeDtos(new MySqlParameterTypeDao().getAll());
-        return jaxbParser.buildXmlWithJaxb(parameterTypes);
+        return parameterTypes;
     }
 
     @Override
-    public String getSingleInstanseFromCatalogById(int id) throws GuitarShopException, JAXBException {
-        JaxbParser jaxbParser = new JaxbParser();
-        ParameterTypeDto parameterTypeDto = new MySqlParameterTypeDao().searchById(id);
-        return jaxbParser.buildXmlWithJaxb(parameterTypeDto);
+    public ParameterTypeDto getSingleInstanceFromCatalogById(int id) throws GuitarShopException, JAXBException {
+        return new MySqlParameterTypeDao().searchById(id);
     }
 }

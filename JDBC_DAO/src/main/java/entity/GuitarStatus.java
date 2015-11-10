@@ -81,7 +81,7 @@ public class GuitarStatus implements Entity {
     public GuitarStatusDto createDto() {
         GuitarStatusDto guitarStatusDto = new GuitarStatusDto();
         guitarStatusDto.setStatusId((Integer) values[ID]);
-        guitarStatusDto.setStatus((Character) values[STATUS]);
+        guitarStatusDto.setStatus((String) values[STATUS]);
         guitarStatusDto.setDesc((String) values[DESC]);
         return guitarStatusDto;
     }

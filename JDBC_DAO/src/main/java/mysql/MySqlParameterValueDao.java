@@ -9,11 +9,11 @@ import myUtils.GuitarShopException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MqSqlParameterValueDao implements ParameterValueDao {
+public class MySqlParameterValueDao implements ParameterValueDao {
 
     private GuitarShopManager guitarShopManager;
 
-    public MqSqlParameterValueDao() throws GuitarShopException {
+    public MySqlParameterValueDao() throws GuitarShopException {
         guitarShopManager = GuitarShopManager.getInstance();
 
     }

@@ -1,30 +1,30 @@
 package parser;
 
-import dto.CustomerDto;
-import mysql.MySqlCustomerDao;
+import dto.FullGuitarDto;
+import forJaxb.FullGuitars;
 import mysql.MySqlGuitarDao;
 import org.junit.Before;
 import org.junit.Test;
 
-public class JaxbParserTest {
+import java.util.List;
 
-    private JaxbParser jaxbParser;
+public class JaxbParserTest {
 
     @Before
     public void setUp() throws Exception {
-        jaxbParser = new JaxbParser();
+
     }
 
     @Test
     public void testBuildXmlWithJaxb() throws Exception {
-        //jaxbParser.buildXmlWithJaxb(new MySqlCustomerDao().searchById(1));
-        jaxbParser.buildXmlWithJaxb(new MySqlGuitarDao().getFullGuitarById(1));
+        FullGuitars fullGuitars = new FullGuitars();
+        List<FullGuitarDto> fullGuitarDtos = new MySqlGuitarDao().getAllFullGuitar();
+        fullGuitars.setFullGuitarDtos(fullGuitarDtos);
+        JaxbParser.buildXmlWithJaxb(fullGuitars);
     }
 
     @Test
     public void testBuildObjectWithJaxb() throws Exception {
-        CustomerDto customerDto = (CustomerDto) jaxbParser.buildObjectWithJaxb(new CustomerDto(), jaxbParser.buildXmlWithJaxb(new MySqlCustomerDao().searchById(1)));
-        System.out.println(customerDto.getFirstName());
-        System.out.println(customerDto.getLastName());
+
     }
 }

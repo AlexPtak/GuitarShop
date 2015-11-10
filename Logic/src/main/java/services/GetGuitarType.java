@@ -4,24 +4,20 @@ import dto.GuitarTypeDto;
 import forJaxb.GuitarTypes;
 import myUtils.GuitarShopException;
 import mysql.MySqlGuitarTypeDao;
-import parser.JaxbParser;
 
 import javax.xml.bind.JAXBException;
 
-public class GetGuitarType implements GetCatalog {
+public class GetGuitarType implements GetCatalog<GuitarTypeDto> {
 
     @Override
-    public String getCatalogInXml() throws GuitarShopException, JAXBException {
-        JaxbParser jaxbParser = new JaxbParser();
+    public GuitarTypes getCatalogInXml() throws GuitarShopException, JAXBException {
         GuitarTypes guitarTypes = new GuitarTypes();
         guitarTypes.setGuitarTypeDtos(new MySqlGuitarTypeDao().getAll());
-        return jaxbParser.buildXmlWithJaxb(guitarTypes);
+        return guitarTypes;
     }
 
     @Override
-    public String getSingleInstanseFromCatalogById(int id) throws GuitarShopException, JAXBException {
-        JaxbParser jaxbParser = new JaxbParser();
-        GuitarTypeDto guitarTypeDto = new MySqlGuitarTypeDao().searchById(id);
-        return jaxbParser.buildXmlWithJaxb(guitarTypeDto);
+    public GuitarTypeDto getSingleInstanceFromCatalogById(int id) throws GuitarShopException, JAXBException {
+        return new MySqlGuitarTypeDao().searchById(id);
     }
 }

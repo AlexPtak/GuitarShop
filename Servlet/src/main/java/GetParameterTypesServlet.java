@@ -1,4 +1,6 @@
+import forJaxb.ParameterTypes;
 import myUtils.GuitarShopException;
+import parser.JaxbParser;
 import services.GetParameterTypes;
 
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ public class GetParameterTypesServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         GetParameterTypes getParameterTypes = new GetParameterTypes();
         try {
-            writer.print(getParameterTypes.getCatalogInXml());
+            ParameterTypes parameterTypesDto = getParameterTypes.getCatalogInXml();
+            String xml = JaxbParser.buildXmlWithJaxb(parameterTypesDto);
+            writer.print(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (GuitarShopException e) {

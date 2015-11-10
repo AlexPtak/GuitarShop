@@ -13,7 +13,7 @@ public class CreateUser {
         if (mySqlCustomerDao.searchByLogin(customerDto.getLogin()) == null) {
             mySqlCustomerDao.insertCustomer(customerDto);
             builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-            builder.append("<exception>you're in!</exception>");
+            builder.append("<massage>you're in!</massage>");
             return builder.toString();
         } else throw new GuitarShopException("please change your login beach!");
     }

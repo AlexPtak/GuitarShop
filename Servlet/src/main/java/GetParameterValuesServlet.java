@@ -1,4 +1,6 @@
+import forJaxb.ParameterValues;
 import myUtils.GuitarShopException;
+import parser.JaxbParser;
 import services.GetParameterValues;
 
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ public class GetParameterValuesServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         GetParameterValues getParameterValues = new GetParameterValues();
         try {
-            writer.print(getParameterValues.getCatalogInXml());
+            ParameterValues parameterValuesDto = getParameterValues.getCatalogInXml();
+            String xml = JaxbParser.buildXmlWithJaxb(parameterValuesDto);
+            writer.print(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (GuitarShopException e) {

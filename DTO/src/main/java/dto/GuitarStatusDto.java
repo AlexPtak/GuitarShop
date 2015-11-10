@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GuitarStatusDto {
 
     private int statusId;
-    private char status;
+    private String status;
     private String desc;
 
     public int getStatusId() {
@@ -20,12 +20,12 @@ public class GuitarStatusDto {
         this.statusId = statusId;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
     @XmlElement(name = "status")
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

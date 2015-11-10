@@ -3,25 +3,21 @@ package services;
 import dto.ParameterValueDto;
 import forJaxb.ParameterValues;
 import myUtils.GuitarShopException;
-import mysql.MqSqlParameterValueDao;
-import parser.JaxbParser;
+import mysql.MySqlParameterValueDao;
 
 import javax.xml.bind.JAXBException;
 
-public class GetParameterValues implements GetCatalog {
+public class GetParameterValues implements GetCatalog<ParameterValueDto> {
 
     @Override
-    public String getCatalogInXml() throws GuitarShopException, JAXBException {
-        JaxbParser jaxbParser = new JaxbParser();
+    public ParameterValues getCatalogInXml() throws GuitarShopException, JAXBException {
         ParameterValues parameterValues = new ParameterValues();
-        parameterValues.setParameterValueDtos(new MqSqlParameterValueDao().getAll());
-        return jaxbParser.buildXmlWithJaxb(parameterValues);
+        parameterValues.setParameterValueDtos(new MySqlParameterValueDao().getAll());
+        return parameterValues;
     }
 
     @Override
-    public String getSingleInstanseFromCatalogById(int id) throws GuitarShopException, JAXBException {
-        JaxbParser jaxbParser = new JaxbParser();
-        ParameterValueDto parameterValueDto = new MqSqlParameterValueDao().searchById(id);
-        return jaxbParser.buildXmlWithJaxb(parameterValueDto);
+    public ParameterValueDto getSingleInstanceFromCatalogById(int id) throws GuitarShopException, JAXBException {
+        return new MySqlParameterValueDao().searchById(id);
     }
 }

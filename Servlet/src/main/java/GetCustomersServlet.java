@@ -1,4 +1,6 @@
+import forJaxb.Customers;
 import myUtils.GuitarShopException;
+import parser.JaxbParser;
 import services.GetCustomers;
 
 import javax.servlet.ServletException;
@@ -14,9 +16,11 @@ public class GetCustomersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter writer = response.getWriter();
-        GetCustomers customers = new GetCustomers();
+        GetCustomers getCustomers = new GetCustomers();
         try {
-            writer.print(customers.getCatalogInXml());
+            Customers customersDto = getCustomers.getCatalogInXml();
+            String xml = JaxbParser.buildXmlWithJaxb(customersDto);
+            writer.print(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (GuitarShopException e) {

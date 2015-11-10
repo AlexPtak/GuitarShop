@@ -1,4 +1,6 @@
+import forJaxb.FullGuitars;
 import myUtils.GuitarShopException;
+import parser.JaxbParser;
 import services.GetFullGuitar;
 
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ public class GetFullGuitarsServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         GetFullGuitar getFullGuitar = new GetFullGuitar();
         try {
-            writer.print(getFullGuitar.getCatalogInXml());
+            FullGuitars fullGuitarsDto = getFullGuitar.getCatalogInXml();
+            String xml = JaxbParser.buildXmlWithJaxb(fullGuitarsDto);
+            writer.print(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (GuitarShopException e) {

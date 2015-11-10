@@ -1,4 +1,6 @@
+import forJaxb.GuitarBrands;
 import myUtils.GuitarShopException;
+import parser.JaxbParser;
 import services.GetGuitarBrands;
 
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ public class GetGuitarBrandsServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         GetGuitarBrands getGuitarBrands = new GetGuitarBrands();
         try {
-            writer.print(getGuitarBrands.getCatalogInXml());
+            GuitarBrands guitarBrandsDto = getGuitarBrands.getCatalogInXml();
+            String xml = JaxbParser.buildXmlWithJaxb(guitarBrandsDto);
+            writer.print(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (GuitarShopException e) {

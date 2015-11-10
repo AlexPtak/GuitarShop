@@ -1,9 +1,7 @@
 package mysql;
 
 import dao.GuitarDao;
-import dto.FullGuitarDto;
-import dto.GuitarDto;
-import dto.ParameterDto;
+import dto.*;
 import entity.Entity;
 import entity.Guitar;
 import myUtils.GuitarShopException;
@@ -41,24 +39,30 @@ public class MySqlGuitarDao implements GuitarDao {
     public FullGuitarDto getFullGuitarById(int id) throws GuitarShopException {
 
         FullGuitarDto fullGuitarDto = new FullGuitarDto();
+
         GuitarDto guitarDto = new MySqlGuitarDao().searchById(id);
+        GuitarStatusDto guitarStatusDto = new MySqlGuitarStatusDao().searchById(guitarDto.getGuitarStatusId());
+        GuitarBrandDto guitarBrandDto = new MySqlGuitarBrandDao().selectById(guitarDto.getGuitarBrandId());
+        GuitarTypeDto guitarTypeDto = new MySqlGuitarTypeDao().searchById(guitarDto.getGuitarTypeId());
+
         fullGuitarDto.setGuitarDto(guitarDto);
+        fullGuitarDto.setGuitarStatus(guitarStatusDto);
+        fullGuitarDto.setGuitarBrand(guitarBrandDto);
+        fullGuitarDto.setGuitarType(guitarTypeDto);
 
-        fullGuitarDto.setGuitarStatus(new MySqlGuitarStatusDao().getStatusById(guitarDto.getGuitarStatusId()));
-        fullGuitarDto.setGuitarBrand(new MySqlGuitarBrandDao().getBrandNameById(guitarDto.getGuitarBrandId()));
-        fullGuitarDto.setGuitarType(new MySqlGuitarTypeDao().getTypeNameById(guitarDto.getGuitarTypeId()));
-
-        List<ParameterDto> parameterDtos = new MySqlParameterDao().getAll();
-        Map<String, String> parameterTypeValue = new HashMap<String, String>();
+        List<ParameterDto> parameterDtos = new MySqlParameterDao().searchById(guitarDto.getGuitarId());
+        Map<ParameterTypeDto, ParameterValueDto> parameterTypeValue = new HashMap<ParameterTypeDto, ParameterValueDto>();
         for (ParameterDto elem : parameterDtos) {
-            if (elem.getGuitarId() == id) {
-                String currentType = new MySqlParameterTypeDao().getTypeById(elem.getParameterTypeId());
-                String currentValue = elem.getValue();
-                parameterTypeValue.put(currentType, currentValue);
-            }
+            ParameterTypeDto currentParameterTypeDto = new MySqlParameterTypeDao().searchById(elem.getParameterTypeId());
+            ParameterValueDto currentParameterValueDto = new MySqlParameterValueDao().searchById(Integer.parseInt(elem.getValue()));
+            parameterTypeValue.put(currentParameterTypeDto, currentParameterValueDto);
         }
 
-        fullGuitarDto.setParameterTypeValue(parameterTypeValue);
+        fullGuitarDto.setParameterTypeValueDtos(parameterTypeValue);
+
+        fullGuitarDto.getGuitarDto().setGuitarStatusId(null);
+        fullGuitarDto.getGuitarDto().setGuitarBrandId(null);
+        fullGuitarDto.getGuitarDto().setGuitarTypeId(null);
 
         return fullGuitarDto;
     }

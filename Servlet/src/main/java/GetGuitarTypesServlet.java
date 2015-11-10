@@ -1,4 +1,6 @@
+import forJaxb.GuitarTypes;
 import myUtils.GuitarShopException;
+import parser.JaxbParser;
 import services.GetGuitarType;
 
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ public class GetGuitarTypesServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         GetGuitarType getGuitarType = new GetGuitarType();
         try {
-            writer.print(getGuitarType.getCatalogInXml());
+            GuitarTypes guitarTypesDto = getGuitarType.getCatalogInXml();
+            String xml = JaxbParser.buildXmlWithJaxb(guitarTypesDto);
+            writer.print(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (GuitarShopException e) {

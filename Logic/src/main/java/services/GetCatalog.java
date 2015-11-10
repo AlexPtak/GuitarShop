@@ -4,8 +4,8 @@ import myUtils.GuitarShopException;
 
 import javax.xml.bind.JAXBException;
 
-public interface GetCatalog {
+public interface GetCatalog<T> {
 
-    public String getCatalogInXml() throws GuitarShopException, JAXBException;
-    public String getSingleInstanseFromCatalogById(int id) throws GuitarShopException, JAXBException;
+    public Object getCatalogInXml() throws GuitarShopException, JAXBException;
+    public T getSingleInstanceFromCatalogById(int id) throws GuitarShopException, JAXBException;
 }
