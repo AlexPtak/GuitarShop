@@ -66,7 +66,7 @@ public class Guitar implements Entity {
         return (Double) values[PRICE];
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         values[PRICE] = price;
     }
 

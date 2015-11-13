@@ -14,6 +14,7 @@ public class FullGuitarDto {
     private GuitarStatusDto guitarStatus;
     private GuitarBrandDto guitarBrand;
     private GuitarTypeDto guitarType;
+
     private Map<ParameterTypeDto, ParameterValueDto> parameterTypeValueDtos;
 
     public GuitarDto getGuitarDto() {

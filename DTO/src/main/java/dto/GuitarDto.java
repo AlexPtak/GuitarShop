@@ -9,16 +9,16 @@ public class GuitarDto {
 
     private Integer guitarId;
     private String model;
-    private double price;
+    private Double price;
     private String country;
     private String color;
-    private int numberOfStrings;
-    private int numberOfFrets;
+    private Integer numberOfStrings;
+    private Integer numberOfFrets;
     private Integer guitarStatusId;
     private Integer guitarBrandId;
     private Integer guitarTypeId;
 
-    public int getGuitarId() {
+    public Integer getGuitarId() {
         return guitarId;
     }
 
@@ -36,12 +36,12 @@ public class GuitarDto {
         this.model = model;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
     @XmlElement(name = "price")
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -63,25 +63,25 @@ public class GuitarDto {
         this.color = color;
     }
 
-    public int getNumberOfStrings() {
+    public Integer getNumberOfStrings() {
         return numberOfStrings;
     }
 
     @XmlElement(name = "number_of_strings")
-    public void setNumberOfStrings(int numberOfStrings) {
+    public void setNumberOfStrings(Integer numberOfStrings) {
         this.numberOfStrings = numberOfStrings;
     }
 
-    public int getNumberOfFrets() {
+    public Integer getNumberOfFrets() {
         return numberOfFrets;
     }
 
     @XmlElement(name = "number_of_frets")
-    public void setNumberOfFrets(int numberOfFrets) {
+    public void setNumberOfFrets(Integer numberOfFrets) {
         this.numberOfFrets = numberOfFrets;
     }
 
-    public int getGuitarStatusId() {
+    public Integer getGuitarStatusId() {
         return guitarStatusId;
     }
 
@@ -90,7 +90,7 @@ public class GuitarDto {
         this.guitarStatusId = guitarStatusId;
     }
 
-    public int getGuitarBrandId() {
+    public Integer getGuitarBrandId() {
         return guitarBrandId;
     }
 
@@ -99,12 +99,28 @@ public class GuitarDto {
         this.guitarBrandId = guitarBrandId;
     }
 
-    public int getGuitarTypeId() {
+    public Integer getGuitarTypeId() {
         return guitarTypeId;
     }
 
     @XmlElement(name = "guitar_type_id")
     public void setGuitarTypeId(Integer guitarTypeId) {
         this.guitarTypeId = guitarTypeId;
+    }
+
+    @Override
+    public String toString() {
+        return "GuitarDto{" +
+                "guitarId=" + guitarId +
+                ", model='" + model + '\'' +
+                ", price=" + price +
+                ", country='" + country + '\'' +
+                ", color='" + color + '\'' +
+                ", numberOfStrings=" + numberOfStrings +
+                ", numberOfFrets=" + numberOfFrets +
+                ", guitarStatusId=" + guitarStatusId +
+                ", guitarBrandId=" + guitarBrandId +
+                ", guitarTypeId=" + guitarTypeId +
+                '}';
     }
 }

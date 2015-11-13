@@ -7,15 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GUITAR_BRAND")
 public class GuitarBrandDto {
 
-    private int brandId;
+    private Integer brandId;
     private String brand;
 
-    public int getBrandId() {
+    public Integer getBrandId() {
         return brandId;
     }
 
     @XmlAttribute(name = "guitar_brand_id")
-    public void setBrandId(int brandId) {
+    public void setBrandId(Integer brandId) {
         this.brandId = brandId;
     }
 

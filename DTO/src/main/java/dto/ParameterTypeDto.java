@@ -7,15 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PARAMETER_TYPE")
 public class ParameterTypeDto {
 
-    private int parameterTypeId;
+    private Integer parameterTypeId;
     private String type;
 
-    public int getParameterTypeId() {
+    public Integer getParameterTypeId() {
         return parameterTypeId;
     }
 
     @XmlAttribute(name = "parameter_type_id")
-    public void setParameterTypeId(int parameterTypeId) {
+    public void setParameterTypeId(Integer parameterTypeId) {
         this.parameterTypeId = parameterTypeId;
     }
 

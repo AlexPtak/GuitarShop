@@ -74,4 +74,28 @@ public class MySqlGuitarDao implements GuitarDao {
         for (GuitarDto elem : guitarDtos) fullGuitarDtos.add(getFullGuitarById(elem.getGuitarId()));
         return fullGuitarDtos;
     }
+
+    @Override
+    public List<FullGuitarDto> searchByDtoFilter(GuitarDto filter) throws GuitarShopException {
+
+        if (filter == null) filter = new GuitarDto();
+
+        Guitar guitar = new Guitar();
+        guitar.setId(filter.getGuitarId());
+        guitar.setModel(filter.getModel());
+        guitar.setPrice(filter.getPrice());
+        guitar.setCountry(filter.getCountry());
+        guitar.setColor(filter.getColor());
+        guitar.setNumberOfStrings(filter.getNumberOfStrings());
+        guitar.setNumberOfFrets(filter.getNumberOfFrets());
+        guitar.setStatusId(filter.getGuitarStatusId());
+        guitar.setTypeId(filter.getGuitarTypeId());
+        guitar.setBrandId(filter.getGuitarBrandId());
+
+        List<Entity> entities = guitarShopManager.select(guitar);
+        List<FullGuitarDto> fullGuitarDtos = new ArrayList<FullGuitarDto>();
+        for (Entity elem : entities) fullGuitarDtos.add(getFullGuitarById((Integer) elem.getValues()[0]));
+
+        return fullGuitarDtos;
+    }
 }

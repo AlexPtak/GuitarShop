@@ -12,4 +12,5 @@ public interface GuitarDao {
     public List<GuitarDto> getAll() throws GuitarShopException;
     public FullGuitarDto getFullGuitarById(int id) throws GuitarShopException;
     public List<FullGuitarDto> getAllFullGuitar() throws GuitarShopException;
+    public List<FullGuitarDto> searchByDtoFilter(GuitarDto filter) throws GuitarShopException;
 }

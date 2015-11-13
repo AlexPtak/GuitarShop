@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PARAMETER_VALUE")
 public class ParameterValueDto {
 
-    private int parameterValueId;
+    private Integer parameterValueId;
     private String value;
-    private int parameterTypeId;
+    private Integer parameterTypeId;
 
-    public int getParameterValueId() {
+    public Integer getParameterValueId() {
         return parameterValueId;
     }
 
     @XmlAttribute(name = "parameter_value_id")
-    public void setParameterValueId(int parameterValueId) {
+    public void setParameterValueId(Integer parameterValueId) {
         this.parameterValueId = parameterValueId;
     }
 
@@ -29,12 +29,12 @@ public class ParameterValueDto {
         this.value = value;
     }
 
-    public int getParameterTypeId() {
+    public Integer getParameterTypeId() {
         return parameterTypeId;
     }
 
     @XmlElement(name = "parameter_type_id")
-    public void setParameterTypeId(int parameterTypeId) {
+    public void setParameterTypeId(Integer parameterTypeId) {
         this.parameterTypeId = parameterTypeId;
     }
 }

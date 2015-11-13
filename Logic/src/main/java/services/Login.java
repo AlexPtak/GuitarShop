@@ -13,6 +13,16 @@ public class Login {
         CustomerDto customerDto = mySqlCustomerDao.searchByLogin(login);
         if (customerDto != null) {
             if (mySqlCustomerDao.searchByPassword(password) != null) {
+
+
+
+
+
+
+
+
+
+
                 builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
                 builder.append("<massage>you're in!</massage>");
                 return builder.toString();

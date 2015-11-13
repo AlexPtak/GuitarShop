@@ -7,34 +7,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GUITAR_IN_PURCHASE")
 public class GuitarInPurchaseDto {
 
-    private int purchaseId;
-    private int guitarId;
-    private int count;
+    private Integer purchaseId;
+    private Integer guitarId;
+    private Integer count;
 
-    public int getPurchaseId() {
+    public Integer getPurchaseId() {
         return purchaseId;
     }
 
     @XmlAttribute(name = "purchase_id")
-    public void setPurchaseId(int purchaseId) {
+    public void setPurchaseId(Integer purchaseId) {
         this.purchaseId = purchaseId;
     }
 
-    public int getGuitarId() {
+    public Integer getGuitarId() {
         return guitarId;
     }
 
     @XmlElement(name = "guitar_id")
-    public void setGuitarId(int guitarId) {
+    public void setGuitarId(Integer guitarId) {
         this.guitarId = guitarId;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
     @XmlElement(name = "count")
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 }

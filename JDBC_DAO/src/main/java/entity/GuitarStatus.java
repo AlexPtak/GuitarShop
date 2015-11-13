@@ -29,7 +29,7 @@ public class GuitarStatus implements Entity {
         return (String) values[STATUS];
     }
 
-    public void setStatus(Character status) {
+    public void setStatus(String status) {
         values[STATUS] = status;
     }
 

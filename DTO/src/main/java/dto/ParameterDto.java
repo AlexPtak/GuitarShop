@@ -2,23 +2,23 @@ package dto;
 
 public class ParameterDto {
 
-    private int guitarId;
-    private int parameterTypeId;
+    private Integer guitarId;
+    private Integer parameterTypeId;
     private String value;
 
-    public int getGuitarId() {
+    public Integer getGuitarId() {
         return guitarId;
     }
 
-    public void setGuitarId(int guitarId) {
+    public void setGuitarId(Integer guitarId) {
         this.guitarId = guitarId;
     }
 
-    public int getParameterTypeId() {
+    public Integer getParameterTypeId() {
         return parameterTypeId;
     }
 
-    public void setParameterTypeId(int parameterTypeId) {
+    public void setParameterTypeId(Integer parameterTypeId) {
         this.parameterTypeId = parameterTypeId;
     }
 

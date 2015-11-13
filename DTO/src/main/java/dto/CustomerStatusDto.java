@@ -7,25 +7,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "CUSTOMER_STATUS")
 public class CustomerStatusDto {
 
-    private int statusId;
-    private char status;
+    private Integer statusId;
+    private String status;
     private String desc;
 
-    public int getStatusId() {
+    public Integer getStatusId() {
         return statusId;
     }
 
     @XmlAttribute(name = "status_id")
-    public void setStatusId(int statusId) {
+    public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
     @XmlElement(name = "status")
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 public class JaxbParser {
@@ -24,6 +25,14 @@ public class JaxbParser {
         JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         object = unmarshaller.unmarshal(xml);
+        return object;
+    }
+
+    public static Object buildObjectWithJaxb(Object object, String xml) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        StringReader reader = new StringReader(xml);
+        object = unmarshaller.unmarshal(reader);
         return object;
     }
 }

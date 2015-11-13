@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GUITAR_STATUS")
 public class GuitarStatusDto {
 
-    private int statusId;
+    private Integer statusId;
     private String status;
     private String desc;
 
-    public int getStatusId() {
+    public Integer getStatusId() {
         return statusId;
     }
 
     @XmlAttribute(name = "status_id")
-    public void setStatusId(int statusId) {
+    public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
 

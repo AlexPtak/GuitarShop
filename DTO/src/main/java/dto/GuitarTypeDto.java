@@ -7,15 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GUITAR_TYPE")
 public class GuitarTypeDto {
 
-    private int typeId;
+    private Integer typeId;
     private String type;
 
-    public int getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
     @XmlAttribute(name = "type_id")
-    public void setTypeId(int typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 

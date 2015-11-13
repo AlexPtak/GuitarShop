@@ -7,21 +7,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "CUSTOMER")
 public class CustomerDto {
 
-    private int customerId;
+    private Integer customerId;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
     private String login;
     private String pass;
-    private int statusId;
+    private Integer statusId;
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
     @XmlAttribute(name = "customer_id")
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -79,12 +79,12 @@ public class CustomerDto {
         this.pass = pass;
     }
 
-    public int getStatusId() {
+    public Integer getStatusId() {
         return statusId;
     }
 
     @XmlElement(name = "status_id")
-    public void setStatusId(int statusId) {
+    public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
 }

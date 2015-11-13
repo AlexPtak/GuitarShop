@@ -81,7 +81,7 @@ public class CustomerStatus implements Entity {
     public CustomerStatusDto createDto() {
         CustomerStatusDto customerStatusDto = new CustomerStatusDto();
         customerStatusDto.setStatusId((Integer) values[ID]);
-        customerStatusDto.setStatus((Character) values[STATUS]);
+        customerStatusDto.setStatus((String) values[STATUS]);
         customerStatusDto.setDesc((String) values[DESC]);
         return customerStatusDto;
     }
