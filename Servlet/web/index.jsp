@@ -57,7 +57,8 @@
       <%--<input type="text" value="Login" name="login"/>--%>
       <%--<input type="text" value="Password" name="password"/>--%>
       <input type="submit" value="create user"/>
-      <textarea name="textArea"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <textarea name="textArea">
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <CUSTOMER customer_id="4">
           <email>chackSchuldiner@gmail.com</email>
           <first_name>Chack</first_name>
@@ -66,7 +67,19 @@
           <pass>46378</pass>
           <phone>544681</phone>
           <status_id>1</status_id>
-        </CUSTOMER></textarea>
+        </CUSTOMER>
+      </textarea>
     </form>
+
+  <form action="SearchServlet" method="get">
+    <h1>Search</h1>
+    <input type="submit" value="search"/>
+    <textarea name="textAreaForSearch"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <FULL_GUITAR>
+        <guitar_brand guitar_brand_id="11">
+          <brand>LTD</brand>
+        </guitar_brand>
+      </FULL_GUITAR></textarea>
+  </form>
   </body>
 </html>

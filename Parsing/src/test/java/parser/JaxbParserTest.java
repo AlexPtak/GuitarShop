@@ -29,6 +29,13 @@ public class JaxbParserTest {
 
     @Test
     public void testBuildObjectWithJaxb() throws Exception {
-
+        String s = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "      <FULL_GUITAR>\n" +
+                "        <guitar>\n" +
+                "          <color>black</color>\n" +
+                "        </guitar>\n" +
+                "      </FULL_GUITAR>";
+        FullGuitarDto fullGuitarDto = (FullGuitarDto) JaxbParser.buildObjectWithJaxb(new FullGuitarDto(), s);
+        System.out.println(fullGuitarDto.getGuitarDto().getColor());
     }
 }
